@@ -9,7 +9,7 @@ function RightTableContainer(props){
     const { dispatch } = props
 
     function handleDelete(id) {
-        console.log("我是render.id",id)
+        // console.log("我是render.id",id)
         dispatch({
           type: 'Rdata/delete',
           payload: id,

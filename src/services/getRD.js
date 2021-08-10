@@ -1,7 +1,7 @@
 
 import gen from './gen'
 const getRD ={
-    getRightData: `GET /appservice/common/v1/getSomeData`
+    getRightData: `GET /api/list`
 }
 
 const APIFunction = {}

@@ -17,11 +17,12 @@ export default {
         console.log("我是models的getRightTableData")
         try{
           const response = yield call(getRightData,payload)
-          console.log('我是response',response.data)
-          if(response?.code=="200"){
+          // console.log('我是response',response)
+          // console.log('我是response的list',response.list)
+          if(response){
             yield put({
               type: 'saveRightData',
-              payload: response.data
+              payload: response.list
             })
           }else{
             message.error('未请求到数据')
