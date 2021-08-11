@@ -1,7 +1,8 @@
 
 import gen from './gen'
 const getRD ={
-    getRightData: `GET /api/list`
+    getRightData: `GET /api/RightData`,
+    getLeftData: `GET /api/LeftData`,
 }
 
 const APIFunction = {}

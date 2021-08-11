@@ -11,7 +11,7 @@ function RightTableContainer(props){
     function handleDelete(id) {
         // console.log("我是render.id",id)
         dispatch({
-          type: 'Rdata/delete',
+          type: 'GetData/delete',
           payload: id,
         });
     }
@@ -19,7 +19,7 @@ function RightTableContainer(props){
     const getSomeData = async () => {
       setisLoading(true)
       await dispatch({
-        type: 'Rdata/getRightTableData'
+        type: 'GetData/getRightTableData'
       })
       setisLoading(false)
     }
@@ -29,4 +29,4 @@ function RightTableContainer(props){
     )
 }
 
-export default connect(Rdata => Rdata)(RightTableContainer)
+export default connect(GetData => GetData)(RightTableContainer)

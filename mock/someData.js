@@ -53,7 +53,7 @@ const mock = {
   'POST /api/forms': (req, res) => {
     res.send({ message: 'Ok' });
   },
-  'GET /api/list': mockjs.mock({
+  'GET /api/RightData': mockjs.mock({
     'list|100': [{
       id: '@range(100)',
       reportDept: '@city',
@@ -71,7 +71,7 @@ const mock = {
     }],
   }),
   ///drugapi/api/WardApplyService/QueryWardBaseDrugs
-  'GET /api/':mockjs.mock({
+  'GET /api/LeftData':mockjs.mock({
     'code': '200',
     'list|26': [{
       'key|+1':1,

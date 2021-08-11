@@ -1,13 +1,16 @@
 import { message } from "antd";
 
 import APIFunction from '../services/getRD'
-const { getRightData } = APIFunction
+const {
+  getRightData,
+  getLeftData
+} = APIFunction
 
 export default {
-    namespace: 'Rdata',
+    namespace: 'GetData',
     state: {
         RightData: [],
-        
+        LeftData: [],
     },
 
     effects: {
@@ -33,7 +36,29 @@ export default {
           return false
         }
 
+      },
+
+      *getLeftTableData({payload},{call,put}){
+        console.log("我是models的getLeftTableData")
+        try{
+          const response = yield call(getLeftData,payload)
+
+          if(response?.code==200){
+            yield put({
+              type: 'saveLeftData',
+              payload: response.list
+            })
+          }else{
+            message.error('未请求到数据')
+          }
+
+          return response
+        }catch(error){
+          return false
+        }
+
       }
+
 
     },
 
@@ -49,6 +74,12 @@ export default {
         return{
           ...state,
           RightData: payload
+        }
+      },
+      saveLeftData(state,{payload}){
+        return{
+          ...state,
+          LeftData: payload
         }
       }
     },
