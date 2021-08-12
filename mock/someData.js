@@ -57,7 +57,7 @@ const mock = {
     'list|100': [{
       id: '@range(100)',
       reportDept: '@city',
-      'number|+1': 1,
+      'number|+1': 0,
       'patientId|10000-20000': 1,
       completionDate: '@now("second")',
       'outpatient|300000-400000': 1,
@@ -74,7 +74,7 @@ const mock = {
   'GET /api/LeftData':mockjs.mock({
     'code': '200',
     'list|26': [{
-      'key|+1':1,
+      'key|+1':0,
       'drname|3-7': '@string(true)',
       'drserch|2-3': '@string(true)',
       'pack_spec|0-300': 1,
@@ -86,4 +86,4 @@ const mock = {
 };
 
 //模拟网络延时 单位ms
-export default delay(mock, 200);
+export default delay(mock, 300);

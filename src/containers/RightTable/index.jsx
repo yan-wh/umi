@@ -16,16 +16,9 @@ function RightTableContainer(props){
         });
     }
     
-    const getSomeData = async () => {
-      setisLoading(true)
-      await dispatch({
-        type: 'GetData/getRightTableData'
-      })
-      setisLoading(false)
-    }
 
     return(
-      <RightTableComponent {...props} onDelete={handleDelete} handleSearch={getSomeData} isLoading={isLoading}/>
+      <RightTableComponent {...props} onDelete={handleDelete} />
     )
 }
 

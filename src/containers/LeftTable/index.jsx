@@ -7,17 +7,20 @@ function LeftTableContainer(props){
     const [ isLoading, setisLoading ]=useState(false)
     
     const { dispatch } = props
-    
-    const getSomeData = async () => {
+    const mockdata = []
+    const data = [{drname: '', drtype_nm: ''}]
+
+
+    const getRightData = async () => {
       setisLoading(true)
       await dispatch({
-        type: 'GetData/getLeftTableData'
+        type: 'GetData/getRightTableData'
       })
       setisLoading(false)
     }
 
     return(
-      <LeftTableComponent {...props} handleSearch={getSomeData} isLoading={isLoading}/>
+      <LeftTableComponent {...props} isLoading={isLoading} getRightData={getRightData}/>
     )
 }
 

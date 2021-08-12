@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { Table, Popconfirm, Button, Row, Col, Modal, Drawer } from 'antd';
+import style from './index.less'
 
 function RightTableComponent(props){
 
@@ -13,7 +14,10 @@ function RightTableComponent(props){
     {
       title: '名字',
       dataIndex: 'name',
-      ellipsis: true
+      ellipsis: true,
+      onFilter: (value, record) => record.name.indexOf(value) === 0,
+      sorter: (a, b) => a.name.length - b.name.length,
+      sortDirections: ['descend'],
     },
     {
       title: '性别',
@@ -23,14 +27,14 @@ function RightTableComponent(props){
     {
       title: '地址',
       dataIndex: 'address',
-      ellipsis: true
+      ellipsis: true,
     },
     {
       title: '操作',
       dataIndex: 'action',
       render: (text, record,index) => {
         return (
-          // record.id为当前该条数据的id值
+          // record.id为当前该条数据的record.id值
           <Popconfirm title="Delete?" onConfirm={() => onDelete(record.id)}>  
             <Button>Delete</Button>
           </Popconfirm>
@@ -47,26 +51,45 @@ function RightTableComponent(props){
     setIsDrawerOpen(!isDrawerOpen)
   }
 
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: record => ({
+      disabled: record.name === 'Disabled User', // Column configuration not to be checked
+      name: record.name,
+    }),
+  };
+
   // console.log("我是RightData的数据",RightData)
   return (
-    <div>
+    <div className='right-table-container'>
       <Row>
-        <Col span={24} style={{display: "flex"}}>
-          <span>人员明细</span>
-          <Button onClick={handleSearch}>Search</Button>
-          <Button onClick={handleSwitchDrawerOpen}>Add</Button>
+        <Col span={24} style={{display: "flex", justifyContent: 'space-between'}}>
+          <div><span>人员明细</span></div>
+          <div>
+            <Button onClick={handleSwitchDrawerOpen}>Add</Button>
+          </div>
         </Col>
       </Row>
       <Row>
         
         {/* loading={isLoading} */}
         <Table 
+          bordered
+          className='table_style'
+          rowSelection={rowSelection}
           scroll={{x:800}}
           dataSource={RightData} 
           columns={columns} 
-          rowKey='key' 
+          rowKey={record=>record.number}
           loading={isLoading}
-          rowClassName={(record,index)=> record.text === '名字'? 'texts':''}
+          rowClassName={(record,index)=> record.sex==='男'? 'texts':''}
+          // onHeaderRow={column => {
+          //   return {
+          //     onClick: () => {alert("hei，我是表格头部")}, // 点击表头行
+          //   };
+          // }}
           pagination={{
             pageSize:3
           }}
