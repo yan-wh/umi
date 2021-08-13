@@ -33,6 +33,7 @@ export default function LeftTableComponent(props){
     const columns=[
         {
             title: "入室科室",
+            className:"InDepartMent",
             dataIndex: "drname",
             ellipsis: true,
             render: (text,record)=>{
@@ -86,7 +87,7 @@ export default function LeftTableComponent(props){
     ]
 
     return(
-        <div className="left-container">
+        <div className="left_container">
             <Row>
                 <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
                     <div><span>科室领药</span></div>
@@ -97,7 +98,7 @@ export default function LeftTableComponent(props){
                 <Col span={24}>
                     <Spin spinning={isLoading}>
                         <Table
-                            bordered
+
                             rowKey={record=>record.key}
                             columns={columns}
                             // scroll={{x:500}}

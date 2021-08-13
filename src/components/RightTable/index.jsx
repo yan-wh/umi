@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Table, Popconfirm, Button, Row, Col, Modal, Drawer } from 'antd';
-import style from './index.less'
+import './index.less'
 
 function RightTableComponent(props){
 
@@ -76,7 +76,6 @@ function RightTableComponent(props){
         
         {/* loading={isLoading} */}
         <Table 
-          bordered
           className='table_style'
           rowSelection={rowSelection}
           scroll={{x:800}}
