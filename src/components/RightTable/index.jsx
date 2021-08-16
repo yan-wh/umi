@@ -1,5 +1,9 @@
 import React,{useState} from 'react'
-import { Table, Popconfirm, Button, Row, Col, Modal, Drawer } from 'antd';
+import { Table, Popconfirm, Button, Row, Col, Icon } from 'antd';
+import RightModalAdd from './RightModalAdd/index'
+import RightDrawer from './RightDrawer/index'
+
+
 import './index.less'
 
 function RightTableComponent(props){
@@ -65,10 +69,10 @@ function RightTableComponent(props){
   return (
     <div className='right-table-container'>
       <Row>
-        <Col span={24} style={{display: "flex", justifyContent: 'space-between'}}>
-          <div><span>人员明细</span></div>
+        <Col span={24} style={{display: "flex", justifyContent: 'space-between', height: '35px'}}>
+          <div><span className="peopleDetail">人员明细</span></div>
           <div>
-            <Button onClick={handleSwitchDrawerOpen}>Add</Button>
+            <Button onClick={handleSwitchDrawerOpen} className="addPeopleItem"><Icon type="plus" />Add</Button>
           </div>
         </Col>
       </Row>
@@ -103,29 +107,10 @@ function RightTableComponent(props){
         />
 
         {/* 双击=>弹窗 */}
-        <Modal
-          title="Basic Modal"
-          visible={isModelOpen}
-          onOk={handleSwitchModelOpen}
-          onCancel={handleSwitchModelOpen}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
+        <RightDrawer isModelOpen={isModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} handleSwitchModelOpen={handleSwitchModelOpen}/>
         
         {/* 打开=>抽屉 */}
-        <Drawer
-          title="Basic Drawer"
-          placement="right"
-          closable={false}
-          onClose={handleSwitchDrawerOpen}
-          visible={isDrawerOpen}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Drawer>
+        <RightModalAdd  isDrawerOpen={isDrawerOpen} handleSwitchDrawerOpen={handleSwitchDrawerOpen}/>
 
       </Row>
     </div>

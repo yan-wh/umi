@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Table, Popconfirm, Button, Row, Col, Select, Spin  } from 'antd';
+import { Table, Popconfirm, Button, Row, Col, Select, Spin, Icon } from 'antd';
 import './index.less'
 
 const { Option } = Select;
@@ -11,6 +11,13 @@ export default function LeftTableComponent(props){
 
     const [DepartmentValue, setDepartmentValue] = useState('')
     const [mockdata, setmockdata] = useState([])
+    const data_1 = [{
+        drname: '',
+        drtype_nm: ''
+    }]
+    const data = data_1  //这属于浅拷贝，两个指向同一个地址，任意一个对值进行修改都会对另一个造成影响
+    // const data = []  //这属于赋值，error: "data" is read-only,若有了初始值，那么就不能通过赋值重新修改
+    // data = data_1
 
     const selectDepartmentValue=(value)=>{
         setDepartmentValue(value)
@@ -23,10 +30,6 @@ export default function LeftTableComponent(props){
         console.log('...')
     }
     const handleSearch=()=>{
-        const data = [{
-            drname: '',
-            drtype_nm: ''
-        }]
         setmockdata(data)
     }
 
@@ -51,6 +54,7 @@ export default function LeftTableComponent(props){
         {
             title: "出室科室",
             dataIndex: "drtype_nm",
+            className: "OutDepartMent",
             ellipsis: true,
             render: (text,record)=>{
                 if(DepartmentValue.label==='外科'){
@@ -89,9 +93,9 @@ export default function LeftTableComponent(props){
     return(
         <div className="left_container">
             <Row>
-                <Col span={24} style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <div><span>科室领药</span></div>
-                    <div><Button onClick={handleSearch}>新增申请单</Button></div>
+                <Col span={24} style={{display: 'flex', justifyContent: 'space-between', height: '35px'}}>
+                    <div><span className="takeMedical">科室选择</span></div>
+                    <div><Button onClick={handleSearch} className="newAddQuestPaper"><Icon type="plus" />新增申请单</Button></div>
                 </Col>
             </Row>
             <Row>
