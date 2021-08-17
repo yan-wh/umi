@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Table, Popconfirm, Button, Row, Col, Icon } from 'antd';
 import RightModalAdd from './RightModalAdd/index'
 import RightDrawer from './RightDrawer/index'
+import RightTableColumns from './RightTableColumns'
 
 
 import './index.less'
@@ -14,38 +15,6 @@ function RightTableComponent(props){
   const [isModelOpen, setIsModelOpen] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-  const columns = [
-    {
-      title: '名字',
-      dataIndex: 'name',
-      ellipsis: true,
-      onFilter: (value, record) => record.name.indexOf(value) === 0,
-      sorter: (a, b) => a.name.length - b.name.length,
-      sortDirections: ['descend'],
-    },
-    {
-      title: '性别',
-      dataIndex: 'sex',
-      ellipsis: true
-    },
-    {
-      title: '地址',
-      dataIndex: 'address',
-      ellipsis: true,
-    },
-    {
-      title: '操作',
-      dataIndex: 'action',
-      render: (text, record,index) => {
-        return (
-          // record.id为当前该条数据的record.id值
-          <Popconfirm title="Delete?" onConfirm={() => onDelete(record.id)}>  
-            <Button>Delete</Button>
-          </Popconfirm>
-        );
-      },
-    },
-  ];
 
   const handleSwitchModelOpen=()=>{
     setIsModelOpen(!isModelOpen)
@@ -65,6 +34,10 @@ function RightTableComponent(props){
     }),
   };
 
+  const column = RightTableColumns(onDelete).map((col,index)=>{
+    return col
+  })
+
   // console.log("我是RightData的数据",RightData)
   return (
     <div className='right-table-container'>
@@ -82,9 +55,9 @@ function RightTableComponent(props){
         <Table 
           className='table_style'
           rowSelection={rowSelection}
-          scroll={{x:800}}
+          // scroll={{x:800}}
           dataSource={RightData} 
-          columns={columns} 
+          columns={column}
           rowKey={record=>record.number}
           loading={isLoading}
           rowClassName={(record,index)=> record.sex==='男'? 'texts':''}
@@ -99,7 +72,7 @@ function RightTableComponent(props){
           onRow={record=>{
             return{
               onDoubleClick: event=>{
-                console.log("我是event",event.target.title)
+                console.log("我是event",event.target)
                 handleSwitchModelOpen()
               }
             }
@@ -107,10 +80,10 @@ function RightTableComponent(props){
         />
 
         {/* 双击=>弹窗 */}
-        <RightDrawer isModelOpen={isModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} handleSwitchModelOpen={handleSwitchModelOpen}/>
+        <RightDrawer isDrawerOpen={isDrawerOpen} handleSwitchDrawerOpen={handleSwitchDrawerOpen}/>
         
         {/* 打开=>抽屉 */}
-        <RightModalAdd  isDrawerOpen={isDrawerOpen} handleSwitchDrawerOpen={handleSwitchDrawerOpen}/>
+        <RightModalAdd  isModelOpen={isModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} RightData={RightData}/>
 
       </Row>
     </div>

@@ -10,7 +10,7 @@ export default function LeftTableComponent(props){
     const { isLoading, getRightData } = props
 
     const [DepartmentValue, setDepartmentValue] = useState('')
-    const [mockdata, setmockdata] = useState([])
+    const [mockdata, setmockdata] = useState()
     const data_1 = [{
         drname: '',
         drtype_nm: ''
@@ -60,7 +60,7 @@ export default function LeftTableComponent(props){
                 if(DepartmentValue.label==='外科'){
                     return <Select
                         labelInValue
-                        defaultValue={{ key: '' }}
+                        // defaultValue={{ key: '' }}
                         style={{ width: 120 }}
                         onChange={InDepartmentValue}
                     >
@@ -71,7 +71,7 @@ export default function LeftTableComponent(props){
                 else if(DepartmentValue.label==='内科'){
                     return <Select
                         labelInValue
-                        defaultValue={{ key: '' }}
+                        // defaultValue={{ key: '' }}
                         style={{ width: 120 }}
                         onChange={OutDepartmentValue}
                     >
@@ -81,7 +81,7 @@ export default function LeftTableComponent(props){
                 }
                 else{
                     return <Select
-                        defaultValue=''
+                        // defaultValue=''
                         style={{ width: 120 }}
                     >
                     </Select>
@@ -89,6 +89,7 @@ export default function LeftTableComponent(props){
             }
         },
     ]
+
 
     return(
         <div className="left_container">
@@ -108,6 +109,8 @@ export default function LeftTableComponent(props){
                             // scroll={{x:500}}
                             dataSource={mockdata}
                             pagination={false}
+                            locale = {mockdata==undefined? {emptyText:"无数据"}:''}
+
                         />
                     </Spin>
                 </Col>
