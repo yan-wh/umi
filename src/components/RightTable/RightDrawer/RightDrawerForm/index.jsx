@@ -1,58 +1,73 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import './index.less'
 
-class NormalLoginForm extends React.Component {
-  handleSubmit = e => {
+function NormalLoginForm(props){
+
+  const {dispatch} = props
+
+  useEffect(()=>{
+    dispatch({
+      type: 'GetData/getRightDrawerData',
+    })
+    
+  },[dispatch])
+
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
+        dispatch({
+          type: 'GetData/searchRightDrawerPatient',
+          payload: {
+            name: values.name,
+            sex: values.sex
+          }
+        })
       }
     });
   };
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
-        <Form.Item>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' }],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="password"
-              placeholder="Password"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('remember', {
-            valuePropName: 'checked',
-            initialValue: true,
-          })(<Checkbox>Remember me</Checkbox>)}
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-            Log in
-          </Button>
-          Or <a href="">register now!</a>
-        </Form.Item>
-      </Form>
-    );
-  }
+  const { getFieldDecorator } = props.form;
+  console.log("我是筛选过后的数据",)
+    
+  return (
+    <Form onSubmit={handleSubmit} className="login-form">
+      <Form.Item className="form-item-name">
+        {getFieldDecorator('name', {
+          rules: [{ required: true, message: 'Please input patient name!' }],
+        })(
+          <Input
+            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            type="text"
+            placeholder=""
+            style={{width: '150px'}}
+          />,
+        )}
+      </Form.Item>
+      <Form.Item className="form-item-sex">
+        {getFieldDecorator('sex', {
+          rules: [{ required: true, message: 'Please input patient sex!' }],
+        })(
+          <Input
+            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            type="text"
+            placeholder=""
+            style={{width: '150px'}}
+          />,
+        )}
+      </Form.Item>
+      <Form.Item className="form-item-button">
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          搜寻病人
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+  
 }
 
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLoginForm);
+// export default connect(({GetData})=>({GetData}))(WrappedNormalLoginForm)
 export default WrappedNormalLoginForm

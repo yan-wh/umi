@@ -1,9 +1,12 @@
+
 import RightTableColumns from '../RightTableColumns'
 import WrappedNormalLoginForm from './RightDrawerForm'
 import {Drawer, Table, Row, Col, Button} from 'antd'
 
 function RightDrawer(props){
-    const {isDrawerOpen,handleSwitchDrawerOpen,RightData} = props
+    const {isDrawerOpen,handleSwitchDrawerOpen } = props
+    
+    const {RightDrawerData} = props.GetData
 
     const column = RightTableColumns().filter((col,index)=>{
       return col.title!=='操作'
@@ -21,14 +24,14 @@ function RightDrawer(props){
 
           <Row>
             <Col span={24}>
-              <WrappedNormalLoginForm />
-              <Button><span>搜寻病人</span></Button>
+              <WrappedNormalLoginForm {...props}/>
             </Col>
           </Row>
           <Row>
             <Col span={24}>
-              <Table 
-                dataSource={RightData}
+              <Table
+                rowKey={record=>record.id}
+                dataSource={RightDrawerData}
                 columns={column}
               />
             </Col>

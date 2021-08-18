@@ -3,7 +3,8 @@ import { message } from "antd";
 import APIFunction from '../services/getRD'
 const {
   getRightData,
-  getLeftData
+  getLeftData,
+  getRightDrawerData
 } = APIFunction
 
 export default {
@@ -11,6 +12,7 @@ export default {
     state: {
         RightData: [],
         LeftData: [],
+        RightDrawerData: [],
     },
 
     effects: {
@@ -28,7 +30,7 @@ export default {
               payload: response.list
             })
           }else{
-            message.error('未请求到数据')
+            message.error('未请求到RightTableData数据')
           }
 
           return response
@@ -36,6 +38,23 @@ export default {
           return false
         }
 
+      },
+
+      *getRightDrawerData({payload},{call,put}){
+        try{
+          const response = yield call(getRightDrawerData,payload)
+          console.log("我是Drawer的数据",response)
+          if(response){
+            yield put({
+              type: 'saveRightDrawerData',
+              payload: response.list
+            })
+          }else{
+            message.error('未请求到RightDrawer数据')
+          }
+        }catch(error){
+          return false
+        }
       },
 
       *getLeftTableData({payload},{call,put}){
@@ -80,6 +99,21 @@ export default {
         return{
           ...state,
           LeftData: payload
+        }
+      },
+      saveRightDrawerData(state,{payload}){
+        return{
+          ...state,
+          RightDrawerData: payload
+        }
+      },
+      searchRightDrawerPatient(state,{payload}){
+        const targetPatient = state.RightDrawerData.filter((item,index)=>{
+          return item.name==payload.name
+        })
+        return{
+          ...state,
+          RightDrawerData: targetPatient
         }
       }
     },

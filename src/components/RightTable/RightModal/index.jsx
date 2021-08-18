@@ -1,6 +1,6 @@
 import {Modal} from 'antd'
 
-function RightModalAdd(props){
+function RightModal(props){
 
     const {isModelOpen,handleSwitchModelOpen} = props
 
@@ -15,4 +15,4 @@ function RightModalAdd(props){
         </Modal>
     )
 }
-export default RightModalAdd
+export default RightModal

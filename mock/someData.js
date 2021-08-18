@@ -70,6 +70,17 @@ const mock = {
       diseaseName: '@ctitle',
     }],
   }),
+  'GET /api/RightDrawerData': mockjs.mock({
+    'list': [{
+      id: '1',
+      name: '小慧',
+      sex: '女',
+    },{
+      id: '2',
+      name: '小浩',
+      sex: '男'
+    }],
+  }),
   ///drugapi/api/WardApplyService/QueryWardBaseDrugs
   'GET /api/LeftData':mockjs.mock({
     'code': '200',

@@ -4,7 +4,7 @@
 import React from 'react';
 import { Row, Col } from 'antd'
 
-import Header from '../containers/Header'  //后续可能改为从container中引入,目前暂时从component中引入
+import Header from '../containers/Header' 
 import LeftTable from '../containers/LeftTable'
 import RightTable from '../containers/RightTable'
 

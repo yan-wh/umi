@@ -10,7 +10,9 @@ export default function LeftTableComponent(props){
     const { isLoading, getRightData } = props
 
     const [DepartmentValue, setDepartmentValue] = useState('')
-    const [mockdata, setmockdata] = useState()
+
+    //注意： useState([])里面的[]表示空数组，为 '' , useState()括号里面什么都没有，未定义，为undefined
+    const [mockdata, setmockdata] = useState([])  
     const data_1 = [{
         drname: '',
         drtype_nm: ''
@@ -109,7 +111,7 @@ export default function LeftTableComponent(props){
                             // scroll={{x:500}}
                             dataSource={mockdata}
                             pagination={false}
-                            locale = {mockdata==undefined? {emptyText:"无数据"}:''}
+                            locale = {mockdata==''? {emptyText:"请选择科室"}:''}
 
                         />
                     </Spin>

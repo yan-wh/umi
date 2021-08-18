@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Table, Popconfirm, Button, Row, Col, Icon } from 'antd';
-import RightModalAdd from './RightModalAdd/index'
+import RightModal from './RightModal/index'
 import RightDrawer from './RightDrawer/index'
 import RightTableColumns from './RightTableColumns'
 
@@ -9,8 +9,8 @@ import './index.less'
 
 function RightTableComponent(props){
 
-  const { onDelete, handleSearch, isLoading } = props
-  const { RightData } = props.GetData
+  const { onDelete, handleSearch, isLoading, dispatch } = props
+  const { RightData, RightDrawerData } = props.GetData
 
   const [isModelOpen, setIsModelOpen] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -22,6 +22,10 @@ function RightTableComponent(props){
 
   const handleSwitchDrawerOpen=()=>{
     setIsDrawerOpen(!isDrawerOpen)
+    // dispatch请求
+    dispatch({    //如若dispatch语句后还有其它需要在获取数据后执行的语句，那么需要用到async、await语句
+      type: 'GetData/getRightDrawerData',
+    })
   }
 
   const rowSelection = {
@@ -38,7 +42,7 @@ function RightTableComponent(props){
     return col
   })
 
-  // console.log("我是RightData的数据",RightData)
+  console.log("我是RightData的数据",RightData)
   return (
     <div className='right-table-container'>
       <Row>
@@ -61,6 +65,7 @@ function RightTableComponent(props){
           rowKey={record=>record.number}
           loading={isLoading}
           rowClassName={(record,index)=> record.sex==='男'? 'texts':''}
+          locale = {RightData==''? {emptyText:"无数据"}:''}
           // onHeaderRow={column => {
           //   return {
           //     onClick: () => {alert("hei，我是表格头部")}, // 点击表头行
@@ -79,11 +84,11 @@ function RightTableComponent(props){
           }}
         />
 
-        {/* 双击=>弹窗 */}
-        <RightDrawer isDrawerOpen={isDrawerOpen} handleSwitchDrawerOpen={handleSwitchDrawerOpen}/>
-        
         {/* 打开=>抽屉 */}
-        <RightModalAdd  isModelOpen={isModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} RightData={RightData}/>
+        <RightDrawer isDrawerOpen={isDrawerOpen} handleSwitchDrawerOpen={handleSwitchDrawerOpen} {...props}/>
+        
+        {/* 双击=>弹窗 */}
+        <RightModal  isModelOpen={isModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} RightData={RightData}/>
 
       </Row>
     </div>
