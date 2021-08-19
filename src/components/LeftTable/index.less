@@ -7,11 +7,37 @@
     .InDepartMent{
         &.ant-table-row-cell-ellipsis{
             background-color: #dff9fb;
+            text-align: center;
+            position: relative;
         }
+        &.ant-table-row-cell-ellipsis:hover::after{
+            // animation-name: animatebox;
+            // animation-duration: 2s;
+            // animation-fill-mode:forwards; /*动画停在最后100%时候的状态*/
+            // animation-direction:alternate;
+            width: 40%;
+        }
+        &.ant-table-row-cell-ellipsis::after{
+            content: '';
+            height: 4px;
+            display: flex;
+            z-index: 10;
+            width: 0%;
+            background-color: #2D8CF0;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);  //这只是视觉上的向左位移了50%，其实际本体还在left:50%的位置，说白了就是给你克隆了一个虚假的本体显示在-50%的位置
+            transition: 1.5s;
+        }
+        // @keyframes animatebox {
+        //     0%{width: 0%;}
+        //     50%{width: 100%;}
+        // }
     }
     .OutDepartMent{
         &.ant-table-row-cell-ellipsis{
             background-color: #dff9fb;
+            text-align: center;
         }
     }
 }

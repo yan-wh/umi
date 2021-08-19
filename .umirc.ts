@@ -3,13 +3,20 @@ import { IConfig } from 'umi-types';
 // ref: https://umijs.org/config/
 const config: IConfig =  {
   treeShaking: true,
-  //以下为配置式路由，去除即可实现约定式路由
+  // 以下为配置式路由，去除即可实现约定式路由
   // routes: [
   //   {
   //     path: '/',
   //     component: '../layouts/index',
   //     routes: [
-  //       { path: '/', component: '../pages/index' }
+  //       {
+  //         exact: true, 
+  //         path: '/index', 
+  //         component: '../pages/index.jsx',
+  //         routes: [
+  //           {exact: true, path: '/index/DepRecMedicine', component: '@/components/test/index.jsx'}
+  //         ]
+  //       }
   //     ]
   //   }
   // ],

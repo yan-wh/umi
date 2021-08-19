@@ -1,11 +1,15 @@
-import React from 'react'
 import './index.less'
 
 export default function HeaderComponent(){
 
     return(
-        <div className="departmentTakeInterFace">
-            <span>科室领药</span>
+        <div className="header-container">
+            <div className="avatar">
+                头像
+            </div>
+            <div className="system-name">
+                医护患者管理系统
+            </div>
         </div>
     )
 }

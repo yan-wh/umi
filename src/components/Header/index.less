@@ -1,10 +1,21 @@
-.departmentTakeInterFace{
+
+.header-container{
     height: 50px;
-    width: 100%;
-    text-align: center;
-    span{
-        line-height: 50px;
-        font-size: 20px;
-        font-weight: 900;
+    display: flex;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    .avatar{
+        margin-left: 0;
+        margin-right: auto;
     }
+    .system-name{
+        margin-left: auto;
+        margin-right: 0;
+    }
+}
+
+.header-container:hover{
+    box-shadow: 1px 1px 5px #7ed6df;
 }

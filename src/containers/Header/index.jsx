@@ -1,24 +1,8 @@
-import React, { useState } from 'react'
-// import { connect } from 'dva';
-import HeaderComponent from '../../components/Header'
+import HeaderComponent from '@/components/Header'
 
-function HeaderContainer(){
-
-    const [ isLoading, setisLoading ]=useState(false)
-    
-    // const { dispatch } = props
-    
-    // const getSomeData = async () => {
-    //   setisLoading(true)
-    //   await dispatch({
-    //     type: 'GetData/getLeftTableData'
-    //   })
-    //   setisLoading(false)
-    // }
+export default function HeaderContainer(){
 
     return(
-      <HeaderComponent />
+        <HeaderComponent />
     )
 }
-
-export default HeaderContainer

@@ -1,30 +1,35 @@
 // 这是入口界面
 
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'antd'
 
-import Header from '../containers/Header' 
-import LeftTable from '../containers/LeftTable'
-import RightTable from '../containers/RightTable'
+import Header from '@/containers/Header'
+import SideBar from '@/containers/SideBar' 
+import DepRecMedicine from '@/components/DepRecMedicine'
 
 export default function() {
   
+  const [isClickDepRecMedicine,setisClickDepRecMedicine] = useState(false)
+
+  const onClick=()=>{
+    setisClickDepRecMedicine(true)
+  }
+
   return(
-    <div>
+    <div style={{height:'100vh', overflow: 'hidden'}}>
+      {/* header */}
       <Row>
-        <Col span={24}>
-          <Header />
-        </Col>
+        <Header />
       </Row>
+      {/* body */}
+
       <Row>
-        <Col span={8}>
-            <LeftTable />
-        </Col>
-        <Col span={16}>
-            <RightTable />
-        </Col>
+          <Col span={3}>
+              <SideBar onClick={onClick} />
+          </Col>
+          <DepRecMedicine isClickDepRecMedicine={isClickDepRecMedicine}/>
       </Row>
+
     </div>
   )
 }
