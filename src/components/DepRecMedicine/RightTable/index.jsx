@@ -22,11 +22,15 @@ function RightTableComponent(props){
 
   const handleSwitchDrawerOpen=()=>{
     setIsDrawerOpen(!isDrawerOpen)
-    // dispatch请求
-    dispatch({    //如若dispatch语句后还有其它需要在获取数据后执行的语句，那么需要用到async、await语句
-      type: 'GetData/getRightDrawerData',
-    })
   }
+
+  // const handleAddSelectedValueToRightTable=(rowsValue)=>{
+  //   handleSwitchDrawerOpen()
+  //   dispatch({
+  //     type: 'GetData/addRightDrawerSelectedValue',
+  //     payload: rowsValue
+  //   })
+  // }
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -85,7 +89,12 @@ function RightTableComponent(props){
         />
 
         {/* 打开=>抽屉 */}
-        <RightDrawer isDrawerOpen={isDrawerOpen} handleSwitchDrawerOpen={handleSwitchDrawerOpen} {...props}/>
+        <RightDrawer 
+          isDrawerOpen={isDrawerOpen} 
+          handleSwitchDrawerOpen={handleSwitchDrawerOpen}  
+          {...props}
+          // handleAddSelectedValueToRightTable={handleAddSelectedValueToRightTable}
+        />
         
         {/* 双击=>弹窗 */}
         <RightModal  isModelOpen={isModelOpen} handleSwitchModelOpen={handleSwitchModelOpen} RightData={RightData}/>

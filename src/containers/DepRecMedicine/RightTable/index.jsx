@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'dva';
 import {message } from 'antd'
-import RightTableComponent from '../../components/RightTable'
+import RightTableComponent from '@/components/DepRecMedicine/RightTable'
 
 function RightTableContainer(props){
 

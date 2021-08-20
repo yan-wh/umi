@@ -1,18 +1,100 @@
 
+a{
+    color: black;
+}
+
 .header-container{
-    height: 50px;
+    height: 70px;
     display: flex;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-    .avatar{
-        margin-left: 0;
-        margin-right: auto;
+    .col-avatar{
+        background-color: #2f3640;
     }
-    .system-name{
-        margin-left: auto;
-        margin-right: 0;
+    .col-system-name{
+        border-bottom: 1px solid #f1f2f6;
+        display: flex;
+        .left{
+            margin: auto auto auto 10px;
+        }
+        .right{
+            margin: auto 30px auto auto;
+            display: flex;
+
+            //官网
+            .right-1{
+                font-size: 15px;
+                font-weight: 15px;
+                margin-right: 30px;
+                position: relative;
+                text-align: center;
+            }
+            .right-1::after{
+                content: '';
+                height: 4px;
+                display: flex;
+                z-index: 10;
+                width: 0%;
+                background-color: #2D8CF0;
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%);  //这只是视觉上的向左位移了50%，其实际本体还在left:50%的位置，说白了就是给你克隆了一个虚假的本体显示在-50%的位置
+                transition: 1s;
+            }
+            .right-1:hover::after{
+                width: 100%;
+            }
+
+            //合作
+            .right-2{
+                text-align: center;
+                font-size: 15px;
+                font-weight: 15px;
+                margin-right: 30px;
+                position: relative;
+            }
+            .right-2::after{
+                content: '';
+                height: 4px;
+                display: flex;
+                z-index: 10;
+                width: 0%;
+                background-color: #2D8CF0;
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%);  //这只是视觉上的向左位移了50%，其实际本体还在left:50%的位置，说白了就是给你克隆了一个虚假的本体显示在-50%的位置
+                transition: 1s;
+            }
+            .right-2:hover::after{
+                width: 100%;
+            }
+
+            //帮助
+            .right-3{
+                text-align: center;
+                font-size: 15px;
+                font-weight: 15px;
+                position: relative;
+            }
+            .right-3::after{
+                content: '';
+                height: 4px;
+                display: flex;
+                z-index: 10;
+                width: 0%;
+                background-color: #2D8CF0;
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%);  //这只是视觉上的向左位移了50%，其实际本体还在left:50%的位置，说白了就是给你克隆了一个虚假的本体显示在-50%的位置
+                transition: 1s;
+            }
+            .right-3:hover::after{
+                width: 100%;
+            }
+        }
+        
     }
 }
 

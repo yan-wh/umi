@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 // import { connect } from 'dva';
 import SideBarComponent from '../../components/SideBar'
 
-function SideBarContainer(){
+function SideBarContainer(props){
 
     const [ isLoading, setisLoading ]=useState(false)
+    const {onClickDepRec,onClickAdmitPatientList,onClickLeavePatientList} = props
     
     // const { dispatch } = props
     
@@ -17,7 +18,11 @@ function SideBarContainer(){
     // }
 
     return(
-      <SideBarComponent />
+      <SideBarComponent 
+        onClickDepRec={onClickDepRec}
+        onClickAdmitPatientList={onClickAdmitPatientList}
+        onClickLeavePatientList={onClickLeavePatientList}
+      />
     )
 }
 

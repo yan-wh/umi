@@ -1,10 +1,12 @@
-import { Row, Col } from 'antd'
+import { Row, Col, Icon } from 'antd'
 import { withRouter } from 'umi';
 
-import LeftTable from '@/containers/LeftTable'
-import RightTable from '@/containers/RightTable'
+import LeftTable from '@/containers/DepRecMedicine/LeftTable'
+import RightTable from '@/containers/DepRecMedicine/RightTable'
 
-function DepRecMedicine(props){
+// import Coffee from '@/static/coffee.jpg'
+
+function DepRecMedicineComponent(props){
 
     const {location,isClickDepRecMedicine} = props
 
@@ -23,7 +25,12 @@ function DepRecMedicine(props){
         </Col>
         :
         ''
+        // <Col span={21}>
+        //     <Row>
+        //         <img src={Coffee}></img>
+        //     </Row>
+        // </Col>
     )
 }
 
-export default withRouter(DepRecMedicine)
+export default withRouter(DepRecMedicineComponent)

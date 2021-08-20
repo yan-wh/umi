@@ -41,7 +41,7 @@ function NormalLoginForm(props){
           <Input
             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="text"
-            placeholder=""
+            placeholder="姓名"
             style={{width: '150px'}}
           />,
         )}
@@ -53,7 +53,7 @@ function NormalLoginForm(props){
           <Input
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="text"
-            placeholder=""
+            placeholder="性别"
             style={{width: '150px'}}
           />,
         )}

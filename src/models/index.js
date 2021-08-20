@@ -115,6 +115,13 @@ export default {
           ...state,
           RightDrawerData: targetPatient
         }
+      },
+      addRightDrawerSelectedValue(state,{payload}){
+        return{
+          ...state,
+          RightData: payload
+        }
       }
+
     },
   };

@@ -3,15 +3,11 @@ import React, { useState } from 'react'
 import { Menu, Icon, Avatar } from 'antd';
 
 import './index.less'
-import sideBarHeader from '../../static/side_bar_header.ico'
 
 const { SubMenu } = Menu;
 
-export default class SideBarComponent extends React.Component{
 
-    constructor(props){
-        super(props)
-    }
+export default class SideBarComponent extends React.Component{
 
     // submenu keys of first level
     rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
@@ -33,12 +29,9 @@ export default class SideBarComponent extends React.Component{
 
 
     render() {
-        const {onClick} = this.props
+        const {onClickDepRec,onClickAdmitPatientList,onClickLeavePatientList} = this.props  //接收不到onClickAdmitPatientList
         return (
             <div className="side-bar">
-                <div className="side-bar-header">
-                    <Avatar src={sideBarHeader} style={{width: '40px', height: '40px', marginTop: '5px'}}></Avatar>
-                </div>
                 <Menu
                     mode="inline"
                     // openKeys={this.state.openKeys}
@@ -48,37 +41,107 @@ export default class SideBarComponent extends React.Component{
                     <Menu.Item key="1">
                         <span>
                             <Icon type="mail" />
-                            <span onClick={onClick}>科室领药</span>
+                            <span onClick={onClickDepRec}>科室领药</span>
                         </span>
                     </Menu.Item>
                     <SubMenu
                         key="sub1"
                         title={
                             <span>
-                            <Icon type="appstore" />
-                            <span>患者列表</span>
+                                <Icon type="appstore" />
+                                <span>患者列表</span>
                             </span>
                         }
                         >
-                        <Menu.Item key="2">Option 5</Menu.Item>
-                        <Menu.Item key="3">Option 6</Menu.Item>
+                        <Menu.Item key="2"><span onClick={onClickAdmitPatientList}>入院患者</span></Menu.Item>
+                        <Menu.Item key="3"><span onClick={onClickLeavePatientList}>出院患者</span></Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="sub2"
                         title={
                             <span>
                             <Icon type="setting" />
-                            <span>医嘱管理</span>
+                            <span>医嘱</span>
                             </span>
                         }
                         >
-                        <Menu.Item key="4">Option 9</Menu.Item>
-                        <Menu.Item key="5">Option 10</Menu.Item>
-                        <Menu.Item key="6">Option 11</Menu.Item>
-                        <Menu.Item key="7">Option 12</Menu.Item>
+                        <Menu.Item key="4">医嘱查询</Menu.Item>
+                        <Menu.Item key="5">医嘱审核</Menu.Item>
+                        <Menu.Item key="6">医嘱管理</Menu.Item>
                     </SubMenu>
                 </Menu>
             </div>
         );
     }
 }
+
+
+// export default function SideBarComponent(props){
+
+//     // submenu keys of first level
+//     const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+//     const [keys,setKeys] = useState(['sub1'])
+//     const {onClickDepRec,onClickAdmitPatientList,onClickLeavePatientList} = props
+
+//     const onOpenChange = openKeys => {
+//         const latestOpenKey = openKeys.find(key => keys.indexOf(key) === -1);
+//         if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+//             setKeys({
+//                 keys: openKeys
+//             });
+//         } else {
+//             setKeys({
+//                 keys: latestOpenKey ? [latestOpenKey] : [],
+//         });
+//         }
+//     };
+
+//     return (
+//         <div className="side-bar">
+//             <Menu
+//                 mode="inline"
+//                 onOpenChange={onOpenChange}
+//                 style={{ width: 'auto', backgroundColor: '#2f3640', color: '#dcdde1'}}
+//             >
+//                 <Menu.Item key="1">
+//                     <span>
+//                         <Icon type="mail" />
+//                         <span onClick={onClickDepRec}>科室领药</span>
+//                     </span>
+//                 </Menu.Item>
+//                 <SubMenu
+//                     key="sub1"
+//                     title={
+//                         <span>
+//                         <Icon type="appstore" />
+//                         <span>患者列表</span>
+//                         </span>
+//                     }
+//                     >
+//                     <Menu.Item key="2"><span onClick={onClickAdmitPatientList}>入院患者</span></Menu.Item>
+//                     <Menu.Item key="3"><span onClick={onClickLeavePatientList}>出院患者</span></Menu.Item>
+//                 </SubMenu>
+//                 <SubMenu
+//                     key="sub2"
+//                     title={
+//                         <span>
+//                         <Icon type="setting" />
+//                         <span>医嘱</span>
+//                         </span>
+//                     }
+//                     >
+//                     <Menu.Item key="4">医嘱查询</Menu.Item>
+//                     <Menu.Item key="5">医嘱审核</Menu.Item>
+//                     <Menu.Item key="6">医嘱管理</Menu.Item>
+//                 </SubMenu>
+//             </Menu>
+//         </div>
+//     );
+    
+// }
+
+
+
+
+
+
