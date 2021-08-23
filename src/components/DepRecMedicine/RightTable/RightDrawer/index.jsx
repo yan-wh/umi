@@ -7,7 +7,7 @@ import {Drawer, Table, Row, Col, Button} from 'antd'
 function RightDrawer(props){
 
     const [rowsValue,setrowsValue] = useState()
-    console.log("我是rowsValue",rowsValue)
+    // console.log("我是rowsValue",rowsValue)
 
     const {isDrawerOpen,handleSwitchDrawerOpen, handleAddSelectedValueToRightTable, dispatch } = props
     const {RightDrawerData} = props.GetData

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-
 import { Menu, Icon, Avatar } from 'antd';
+
 
 import './index.less'
 
@@ -29,7 +29,7 @@ export default class SideBarComponent extends React.Component{
 
 
     render() {
-        const {onClickDepRec,onClickAdmitPatientList,onClickLeavePatientList} = this.props  //接收不到onClickAdmitPatientList
+        const {onClickToChangeRightContent} = this.props
         return (
             <div className="side-bar">
                 <Menu
@@ -37,11 +37,15 @@ export default class SideBarComponent extends React.Component{
                     // openKeys={this.state.openKeys}
                     onOpenChange={this.onOpenChange}
                     style={{ width: 'auto', backgroundColor: '#2f3640', color: '#dcdde1'}}
+                    onClick={(item,key)=>{
+                        // console.log("我是你此时鼠标点击的item的key值",item.key)
+                        onClickToChangeRightContent(item.key)
+                    }}
                 >
                     <Menu.Item key="1">
                         <span>
                             <Icon type="mail" />
-                            <span onClick={onClickDepRec}>科室领药</span>
+                            <span>科室领药</span>
                         </span>
                     </Menu.Item>
                     <SubMenu
@@ -53,8 +57,8 @@ export default class SideBarComponent extends React.Component{
                             </span>
                         }
                         >
-                        <Menu.Item key="2"><span onClick={onClickAdmitPatientList}>入院患者</span></Menu.Item>
-                        <Menu.Item key="3"><span onClick={onClickLeavePatientList}>出院患者</span></Menu.Item>
+                        <Menu.Item key="2"><span>入院患者</span></Menu.Item>
+                        <Menu.Item key="3"><span>出院患者</span></Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="sub2"

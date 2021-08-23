@@ -46,7 +46,7 @@ function RightTableComponent(props){
     return col
   })
 
-  console.log("我是RightData的数据",RightData)
+  // console.log("我是RightData的数据",RightData)
   return (
     <div className='right-table-container'>
       <Row>

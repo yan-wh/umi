@@ -4,22 +4,26 @@ import { IConfig } from 'umi-types';
 const config: IConfig =  {
   treeShaking: true,
   // 以下为配置式路由，去除即可实现约定式路由
-  // routes: [
-  //   {
-  //     path: '/',
-  //     component: '../layouts/index',
-  //     routes: [
-  //       {
-  //         exact: true, 
-  //         path: '/index', 
-  //         component: '../pages/index.jsx',
-  //         routes: [
-  //           {exact: true, path: '/index/DepRecMedicine', component: '@/components/test/index.jsx'}
-  //         ]
-  //       }
-  //     ]
-  //   }
-  // ],
+  routes: [
+    {
+      exact: true,
+      path: '/',
+      redirect: '/index',
+    },
+    {
+      exact: true,
+      path: '/index',
+      component: './index.jsx',
+      
+    },
+
+    {
+      exact: true,
+      path: '/test',
+      component: './test.jsx',
+    }
+
+  ],
   disableCSSModules: true,
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html

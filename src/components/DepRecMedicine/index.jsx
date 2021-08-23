@@ -8,11 +8,10 @@ import RightTable from '@/containers/DepRecMedicine/RightTable'
 
 function DepRecMedicineComponent(props){
 
-    const {location,isClickDepRecMedicine} = props
+    // const {location,isClickDepRecMedicine} = props
 
 
     return(
-        isClickDepRecMedicine==true? 
         <Col span={21}>
             <Row>
                 <Col span={8}>
@@ -23,13 +22,6 @@ function DepRecMedicineComponent(props){
                 </Col>
             </Row>
         </Col>
-        :
-        ''
-        // <Col span={21}>
-        //     <Row>
-        //         <img src={Coffee}></img>
-        //     </Row>
-        // </Col>
     )
 }
 

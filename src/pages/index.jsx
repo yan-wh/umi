@@ -1,7 +1,7 @@
 // 这是入口界面
 
 import React, { useState } from 'react';
-import { Row, Col, Spin  } from 'antd'
+import { Row, Col, Spin, } from 'antd'
 
 import Header from '@/containers/Header'
 import SideBar from '@/containers/SideBar' 
@@ -9,34 +9,21 @@ import DepRecMedicineContainer from '@/containers/DepRecMedicine'
 import AdmitPatientListContainer from '@/containers/PatientList/AdmitPatientList'
 import LeavePatientListContainer from '@/containers/PatientList/LeavePatientList'
 
+
 export default function() {
   
   const [loading,setloading] = useState(false)
-  const [isClickDepRecMedicine,setisClickDepRecMedicine] = useState(false)
-  const [isClickAdmitPatientList,setisClickAdmitPatientList] = useState(false)
-  const [isClickLeavePatientList,setisClickLeavePatientList] = useState(false)
+  const [currentClickItemKey,setcurrentClickItemKey] = useState('')
 
-  const onClickDepRec=async()=>{
-    setloading(true)
-    await setisClickDepRecMedicine(true)
-    await setisClickAdmitPatientList(false)
-    await setisClickLeavePatientList(false)
-    setloading(false)
-  }
+  const RightContent = [
+    <DepRecMedicineContainer />,
+    <AdmitPatientListContainer />,
+    <LeavePatientListContainer />
+  ]
 
-  const onClickAdmitPatientList=async()=>{
+  const onClickToChangeRightContent=(key)=>{
     setloading(true)
-    await setisClickAdmitPatientList(true)
-    await setisClickLeavePatientList(false)
-    await setisClickDepRecMedicine(false)
-    setloading(false)
-  }
-
-  const onClickLeavePatientList=async()=>{
-    setloading(true)
-    await setisClickLeavePatientList(true)
-    await setisClickDepRecMedicine(false)
-    await setisClickAdmitPatientList(false)
+    setcurrentClickItemKey(key)
     setloading(false)
   }
 
@@ -51,35 +38,11 @@ export default function() {
       <Row>
           <Col span={3}>
               <SideBar 
-                onClickDepRec={onClickDepRec} 
-                onClickAdmitPatientList={onClickAdmitPatientList}
-                onClickLeavePatientList={onClickLeavePatientList}
+                onClickToChangeRightContent={onClickToChangeRightContent} 
               />
           </Col>
 
-          <Spin spinning={loading}>
-            {isClickDepRecMedicine? 
-              <DepRecMedicineContainer isClickDepRecMedicine={isClickDepRecMedicine}/>
-              :
-              ''
-            }
-          </Spin>
-          
-          <Spin spinning={loading}>
-            {isClickAdmitPatientList? 
-              <AdmitPatientListContainer isClickAdmitPatientList={isClickAdmitPatientList}/>
-              :
-              ''
-            }
-          </Spin>
-          
-          <Spin spinning={loading}>
-            {isClickLeavePatientList? 
-              <LeavePatientListContainer isClickLeavePatientList={isClickLeavePatientList}/>
-              :
-              ''
-            }
-          </Spin>
+          {RightContent[currentClickItemKey-1]}
 
           
       </Row>

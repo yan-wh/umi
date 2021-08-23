@@ -5,7 +5,7 @@ import SideBarComponent from '../../components/SideBar'
 function SideBarContainer(props){
 
     const [ isLoading, setisLoading ]=useState(false)
-    const {onClickDepRec,onClickAdmitPatientList,onClickLeavePatientList} = props
+    const {onClickToChangeRightContent} = props
     
     // const { dispatch } = props
     
@@ -19,9 +19,7 @@ function SideBarContainer(props){
 
     return(
       <SideBarComponent 
-        onClickDepRec={onClickDepRec}
-        onClickAdmitPatientList={onClickAdmitPatientList}
-        onClickLeavePatientList={onClickLeavePatientList}
+        onClickToChangeRightContent={onClickToChangeRightContent}
       />
     )
 }

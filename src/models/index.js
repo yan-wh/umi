@@ -43,7 +43,7 @@ export default {
       *getRightDrawerData({payload},{call,put}){
         try{
           const response = yield call(getRightDrawerData,payload)
-          console.log("我是Drawer的数据",response)
+          // console.log("我是Drawer的数据",response)
           if(response){
             yield put({
               type: 'saveRightDrawerData',
