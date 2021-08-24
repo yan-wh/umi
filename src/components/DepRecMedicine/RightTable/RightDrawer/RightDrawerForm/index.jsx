@@ -4,7 +4,8 @@ import './index.less'
 
 function NormalLoginForm(props){
 
-  const {dispatch} = props
+  const {dispatch, handleChangeIsClickSearchPatientBtnValue,isClickSearchPatientBtn} = props
+  // console.log("我是handleChangeIsClickSearchPatientBtnValue",handleChangeIsClickSearchPatientBtnValue)
 
   useEffect(()=>{
     dispatch({
@@ -15,6 +16,9 @@ function NormalLoginForm(props){
 
   const handleSubmit = e => {
     e.preventDefault();
+    if(isClickSearchPatientBtn==true){
+      handleChangeIsClickSearchPatientBtnValue()
+    }
     props.form.validateFields((err, values) => {
       if (!err) {
         // console.log('Received values of form: ', values);
@@ -25,6 +29,7 @@ function NormalLoginForm(props){
             sex: values.sex
           }
         })
+        handleChangeIsClickSearchPatientBtnValue()
       }
     });
   };
@@ -59,9 +64,15 @@ function NormalLoginForm(props){
         )}
       </Form.Item>
       <Form.Item className="form-item-button">
+        {isClickSearchPatientBtn?
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          返回
+        </Button>
+        :
         <Button type="primary" htmlType="submit" className="login-form-button">
           搜寻病人
         </Button>
+        }
       </Form.Item>
     </Form>
   );

@@ -9,9 +9,10 @@ function RightDrawer(props){
 
     const [rowsValue,setrowsValue] = useState()
     // console.log("我是rowsValue",rowsValue)
+    const [isClickSearchPatientBtn,setisClickSearchPatientBtn] = useState(false)
 
     const {isDrawerOpen,handleSwitchDrawerOpen, handleAddSelectedValueToRightTable, dispatch } = props
-    const {RightDrawerData} = props.GetData
+    const {RightDrawerData,RightDrawerSearchData} = props.GetData
 
     const column = RightTableColumns().filter((col,index)=>{
       return col.title!=='操作'
@@ -24,7 +25,9 @@ function RightDrawer(props){
       })
     },[dispatch])
 
-
+    const handleChangeIsClickSearchPatientBtnValue = ()=>{
+      setisClickSearchPatientBtn(!isClickSearchPatientBtn)
+    }
 
     return(
         <Drawer
@@ -42,7 +45,11 @@ function RightDrawer(props){
           {/* 表单 */}
           <Row className="form-search">
             <Col span={24}>
-              <WrappedNormalLoginForm {...props}/>
+              <WrappedNormalLoginForm 
+                {...props}
+                isClickSearchPatientBtn={isClickSearchPatientBtn}
+                handleChangeIsClickSearchPatientBtnValue={handleChangeIsClickSearchPatientBtnValue}
+              />
             </Col>
           </Row>
           {/* 数据展示 */}
@@ -50,14 +57,12 @@ function RightDrawer(props){
             <Col span={24}>
               <Table
                 rowKey={record=>record.number}
-                dataSource={RightDrawerData}
+                dataSource={isClickSearchPatientBtn? RightDrawerSearchData : RightDrawerData}
                 columns={column}
                 rowSelection={{
                   onSelect: (record, selected, selectedRows, nativeEvent)=>{
-                    let arr = []
-                    arr.push(record)
-                    setrowsValue(arr)
-                    // console.log("我是选中的value",arr)
+                    setrowsValue(selectedRows)
+                    // console.log("我是选中的value",selectedRows)
                   }
                 }}
                 pagination={{

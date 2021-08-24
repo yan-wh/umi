@@ -13,6 +13,7 @@ export default {
         RightData: [],
         LeftData: [],
         RightDrawerData: [],
+        RightDrawerSearchData: [],
         isLoading: false
     },
 
@@ -121,7 +122,7 @@ export default {
         )
         return{
           ...state,
-          RightDrawerData: targetPatient
+          RightDrawerSearchData: targetPatient
         }
       },
       addRightDrawerSelectedValue(state,{payload}){
