@@ -4,8 +4,6 @@ import {message } from 'antd'
 import RightTableComponent from '@/components/DepRecMedicine/RightTable'
 
 function RightTableContainer(props){
-
-    const [ isLoading, setisLoading ]=useState(false)
     
     const { dispatch } = props
 

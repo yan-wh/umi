@@ -13,13 +13,14 @@ export default {
         RightData: [],
         LeftData: [],
         RightDrawerData: [],
+        isLoading: false
     },
 
     effects: {
 
       //获取右边表格数据
       *getRightTableData({payload},{call,put}){
-        console.log("我是models的getRightTableData")
+        // console.log("我是models的getRightTableData")
         try{
           const response = yield call(getRightData,payload)
           // console.log('我是response',response)
@@ -58,7 +59,7 @@ export default {
       },
 
       *getLeftTableData({payload},{call,put}){
-        console.log("我是models的getLeftTableData")
+        // console.log("我是models的getLeftTableData")
         try{
           const response = yield call(getLeftData,payload)
 
@@ -82,6 +83,13 @@ export default {
     },
 
     reducers: {
+      saveIsLoading(state,{payload}){
+        // console.log("我是payload",payload)
+        return{
+          ...state,
+          isLoading: payload
+        }
+      },
       delete(state, { payload: id }) {
         const RD = state.RightData.filter(item => item.id !== id)
         return {
@@ -108,18 +116,21 @@ export default {
         }
       },
       searchRightDrawerPatient(state,{payload}){
-        const targetPatient = state.RightDrawerData.filter((item,index)=>{
-          return item.name==payload.name
-        })
+        const targetPatient = state.RightDrawerData.filter((item,index)=>
+          item.name==payload.name
+        )
         return{
           ...state,
           RightDrawerData: targetPatient
         }
       },
       addRightDrawerSelectedValue(state,{payload}){
+        payload.map(item=>{
+          state.RightData.push(item)
+        })
         return{
           ...state,
-          RightData: payload
+          RightData: state.RightData
         }
       }
 

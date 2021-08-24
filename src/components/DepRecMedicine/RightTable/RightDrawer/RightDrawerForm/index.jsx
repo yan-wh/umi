@@ -30,7 +30,7 @@ function NormalLoginForm(props){
   };
 
   const { getFieldDecorator } = props.form;
-  console.log("我是筛选过后的数据",)
+  // console.log("我是筛选过后的数据",)
     
   return (
     <Form onSubmit={handleSubmit} className="login-form">

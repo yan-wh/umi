@@ -1,13 +1,13 @@
 import React,{useState} from 'react'
-import { Table, Popconfirm, Button, Row, Col, Select, Spin, Icon } from 'antd';
+import { Table, Popconfirm, Button, Row, Col, Select, Icon } from 'antd';
 import './index.less'
 
 const { Option } = Select;
 
 export default function LeftTableComponent(props){
 
-    const { LeftData } = props.GetData
-    const { isLoading, getRightData } = props
+    const { getRightData } = props
+    const { isLoading } = props.GetData
 
     const [DepartmentValue, setDepartmentValue] = useState('')
 
@@ -35,6 +35,9 @@ export default function LeftTableComponent(props){
         setmockdata(data)
     }
 
+    const randomNumber = Math.random().toString().slice(-8)
+    // console.log("随机数",Math.random().toString().slice(-5)+Date.now())
+
     const columns=[
         {
             title: "入室科室",
@@ -45,7 +48,7 @@ export default function LeftTableComponent(props){
                 return <Select
                     labelInValue
                     style={{ width: 120 }}
-                    defaultValue={record.drname}
+                    // defaultValue={record.drname}
                     onChange={selectDepartmentValue}
                 >
                     <Option value="Surgery">外科</Option>
@@ -103,18 +106,15 @@ export default function LeftTableComponent(props){
             </Row>
             <Row>
                 <Col span={24}>
-                    <Spin spinning={isLoading}>
-                        <Table
+                    <Table
+                        rowKey={record=>record.key}
+                        columns={columns}
+                        // scroll={{x:500}}
+                        dataSource={mockdata}
+                        pagination={false}
+                        locale = {mockdata==''? {emptyText:"请选择科室"}:''}
 
-                            rowKey={record=>record.key}
-                            columns={columns}
-                            // scroll={{x:500}}
-                            dataSource={mockdata}
-                            pagination={false}
-                            locale = {mockdata==''? {emptyText:"请选择科室"}:''}
-
-                        />
-                    </Spin>
+                    />
                 </Col>
             </Row>
         </div>

@@ -3,6 +3,7 @@ import RightTableColumns from '../RightTableColumns'
 import WrappedNormalLoginForm from './RightDrawerForm'
 import {Drawer, Table, Row, Col, Button} from 'antd'
 
+import './index.less'
 
 function RightDrawer(props){
 
@@ -23,55 +24,54 @@ function RightDrawer(props){
       })
     },[dispatch])
 
-    // //添加数据到右边table中
-    // const onClickAddToRightTable=()=>{
-      
-    // }
-
-    // //关闭抽屉
-    // const onClickCloseDrawer=()=>{
-      
-    // }
 
 
     return(
         <Drawer
           width={550}
-          drawerStyle={{overflow: 'hidden'}}
+          drawerStyle={{overflow: 'hidden',}}
+          bodyStyle={{height: '100vh', overflow: 'hidden'}}
           title="添加病患"
           placement="right"
           closable={false}
+          maskClosable={true}
           // onClose={handleSwitchDrawerOpen}
           visible={isDrawerOpen}
         >
 
           {/* 表单 */}
-          <Row>
+          <Row className="form-search">
             <Col span={24}>
               <WrappedNormalLoginForm {...props}/>
             </Col>
           </Row>
           {/* 数据展示 */}
-          <Row>
+          <Row className="data-table">
             <Col span={24}>
               <Table
-                rowKey={record=>record.id}
+                rowKey={record=>record.number}
                 dataSource={RightDrawerData}
                 columns={column}
                 rowSelection={{
                   onSelect: (record, selected, selectedRows, nativeEvent)=>{
-                    setrowsValue(record)
+                    let arr = []
+                    arr.push(record)
+                    setrowsValue(arr)
+                    // console.log("我是选中的value",arr)
                   }
+                }}
+                pagination={{
+                  pageSize: 5
                 }}
               />
             </Col>
           </Row>
 
           {/* 页尾 */}
-          <Row style={{marginTop: '150px', display: 'flex'}}>
+          <Row className="footer">
             <Button onClick={handleSwitchDrawerOpen} style={{marginRight: '25px', marginLeft: 'auto'}}>取消</Button>
-            <Button >添加</Button>
-            {/* onClick={handleAddSelectedValueToRightTable(rowsValue)} */}
+            {/* // 切记：调用方法传参时，使用箭头函数！否则将导致当前对象指向出错 */}
+            <Button onClick={()=>handleAddSelectedValueToRightTable(rowsValue)}>添加</Button>
           </Row>
 
         </Drawer>

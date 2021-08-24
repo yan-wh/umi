@@ -8,12 +8,15 @@ import SideBar from '@/containers/SideBar'
 import DepRecMedicineContainer from '@/containers/DepRecMedicine'
 import AdmitPatientListContainer from '@/containers/PatientList/AdmitPatientList'
 import LeavePatientListContainer from '@/containers/PatientList/LeavePatientList'
+import { connect } from 'dva';
 
 
-export default function() {
-  
-  const [loading,setloading] = useState(false)
+function Index(props) {
+
   const [currentClickItemKey,setcurrentClickItemKey] = useState('')
+  const [isLoading,setisLoading] = useState(false)
+
+  const {dispatch} = props
 
   const RightContent = [
     <DepRecMedicineContainer />,
@@ -22,9 +25,11 @@ export default function() {
   ]
 
   const onClickToChangeRightContent=(key)=>{
-    setloading(true)
     setcurrentClickItemKey(key)
-    setloading(false)
+    dispatch({
+      type: 'GetData/saveRightData',
+      payload: []
+    })
   }
 
   return(
@@ -42,11 +47,12 @@ export default function() {
               />
           </Col>
 
-          {RightContent[currentClickItemKey-1]}
-
+          {RightContent[currentClickItemKey]}
           
       </Row>
 
     </div>
   )
 }
+
+export default connect(({GetData})=>({GetData}))(Index)

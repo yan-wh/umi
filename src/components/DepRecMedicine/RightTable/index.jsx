@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Table, Popconfirm, Button, Row, Col, Icon } from 'antd';
+import { Table, Popconfirm, Button, Row, Col, Icon, Spin } from 'antd';
 import RightModal from './RightModal/index'
 import RightDrawer from './RightDrawer/index'
 import RightTableColumns from './RightTableColumns'
@@ -9,8 +9,9 @@ import './index.less'
 
 function RightTableComponent(props){
 
-  const { onDelete, handleSearch, isLoading, dispatch } = props
-  const { RightData, RightDrawerData } = props.GetData
+  const { onDelete, dispatch } = props
+  const { RightData, isLoading } = props.GetData
+
 
   const [isModelOpen, setIsModelOpen] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -24,13 +25,13 @@ function RightTableComponent(props){
     setIsDrawerOpen(!isDrawerOpen)
   }
 
-  // const handleAddSelectedValueToRightTable=(rowsValue)=>{
-  //   handleSwitchDrawerOpen()
-  //   dispatch({
-  //     type: 'GetData/addRightDrawerSelectedValue',
-  //     payload: rowsValue
-  //   })
-  // }
+  const handleAddSelectedValueToRightTable=(rowsValue)=>{
+    handleSwitchDrawerOpen()
+    dispatch({
+      type: 'GetData/addRightDrawerSelectedValue',
+      payload: rowsValue
+    })
+  }
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -60,40 +61,41 @@ function RightTableComponent(props){
       <Row>
         
         {/* loading={isLoading} */}
-        <Table 
-          className='table_style'
-          rowSelection={rowSelection}
-          // scroll={{x:800}}
-          dataSource={RightData} 
-          columns={column}
-          rowKey={record=>record.number}
-          loading={isLoading}
-          rowClassName={(record,index)=> record.sex==='男'? 'texts':''}
-          locale = {RightData==''? {emptyText:"无数据"}:''}
-          // onHeaderRow={column => {
-          //   return {
-          //     onClick: () => {alert("hei，我是表格头部")}, // 点击表头行
-          //   };
-          // }}
-          pagination={{
-            pageSize:3
-          }}
-          onRow={record=>{
-            return{
-              onDoubleClick: event=>{
-                console.log("我是event",event.target)
-                handleSwitchModelOpen()
+        <Spin spinning={isLoading}>
+          <Table 
+            className='table_style'
+            rowSelection={rowSelection}
+            // scroll={{x:800}}
+            dataSource={RightData} 
+            columns={column}
+            rowKey={record=>record.number}
+            rowClassName={(record,index)=> record.sex==='男'? 'texts':''}
+            locale = {RightData==''? {emptyText:"无数据"}:''}
+            // onHeaderRow={column => {
+            //   return {
+            //     onClick: () => {alert("hei，我是表格头部")}, // 点击表头行
+            //   };
+            // }}
+            pagination={{
+              pageSize:3
+            }}
+            onRow={record=>{
+              return{
+                onDoubleClick: event=>{
+                  console.log("我是event",event.target)
+                  handleSwitchModelOpen()
+                }
               }
-            }
-          }}
-        />
+            }}
+          />
+        </Spin>
 
         {/* 打开=>抽屉 */}
         <RightDrawer 
           isDrawerOpen={isDrawerOpen} 
           handleSwitchDrawerOpen={handleSwitchDrawerOpen}  
           {...props}
-          // handleAddSelectedValueToRightTable={handleAddSelectedValueToRightTable}
+          handleAddSelectedValueToRightTable={handleAddSelectedValueToRightTable}
         />
         
         {/* 双击=>弹窗 */}

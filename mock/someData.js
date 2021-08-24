@@ -71,14 +71,20 @@ const mock = {
     }],
   }),
   'GET /api/RightDrawerData': mockjs.mock({
-    'list': [{
-      id: '1',
-      name: '小慧',
-      sex: '女',
-    },{
-      id: '2',
-      name: '小浩',
-      sex: '男'
+    'list|10': [{
+      id: '@range(101,110)',
+      reportDept: '@city',
+      'number|+1': 0,
+      'patientId|10000-20000': 1,
+      completionDate: '@now("second")',
+      'outpatient|300000-400000': 1,
+      name: '@cname',
+      sex: '@string("男女",1,1)',
+      'age|1-99': 1,
+      isExamined: '@string("是否",1,1)',
+      occupation: '@String("有无",1,1)',
+      address: '@county(true)',
+      diseaseName: '@ctitle',
     }],
   }),
   ///drugapi/api/WardApplyService/QueryWardBaseDrugs

@@ -3,24 +3,26 @@ import { connect } from 'dva';
 import LeftTableComponent from '@/components/DepRecMedicine/LeftTable'
 
 function LeftTableContainer(props){
-
-    const [ isLoading, setisLoading ]=useState(false)
     
     const { dispatch } = props
-    const mockdata = []
-    const data = [{drname: '', drtype_nm: ''}]
 
 
     const getRightData = async () => {
-      setisLoading(true)
+      await dispatch({
+        type: 'GetData/saveIsLoading',
+        payload: true
+      })
       await dispatch({
         type: 'GetData/getRightTableData'
       })
-      setisLoading(false)
+      await dispatch({
+        type: 'GetData/saveIsLoading',
+        payload: false
+      })
     }
 
     return(
-      <LeftTableComponent {...props} isLoading={isLoading} getRightData={getRightData}/>
+      <LeftTableComponent {...props} getRightData={getRightData}/>
     )
 }
 

@@ -42,7 +42,7 @@ export default class SideBarComponent extends React.Component{
                         onClickToChangeRightContent(item.key)
                     }}
                 >
-                    <Menu.Item key="1">
+                    <Menu.Item key="0">
                         <span>
                             <Icon type="mail" />
                             <span>科室领药</span>
@@ -57,8 +57,8 @@ export default class SideBarComponent extends React.Component{
                             </span>
                         }
                         >
-                        <Menu.Item key="2"><span>入院患者</span></Menu.Item>
-                        <Menu.Item key="3"><span>出院患者</span></Menu.Item>
+                        <Menu.Item key="1"><span>入院患者</span></Menu.Item>
+                        <Menu.Item key="2"><span>出院患者</span></Menu.Item>
                     </SubMenu>
                     <SubMenu
                         key="sub2"
@@ -69,9 +69,9 @@ export default class SideBarComponent extends React.Component{
                             </span>
                         }
                         >
-                        <Menu.Item key="4">医嘱查询</Menu.Item>
-                        <Menu.Item key="5">医嘱审核</Menu.Item>
-                        <Menu.Item key="6">医嘱管理</Menu.Item>
+                        <Menu.Item key="3">医嘱查询</Menu.Item>
+                        <Menu.Item key="4">医嘱审核</Menu.Item>
+                        <Menu.Item key="5">医嘱管理</Menu.Item>
                     </SubMenu>
                 </Menu>
             </div>
