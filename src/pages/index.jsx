@@ -2,35 +2,47 @@
 
 import React, { useState } from 'react';
 import { Row, Col, Spin, } from 'antd'
+import {NavLink} from 'umi'
+// import { Route, Switch } from 'umi/router';
+
 
 import Header from '@/containers/Header'
 import SideBar from '@/containers/SideBar' 
 import DepRecMedicineContainer from '@/containers/DepRecMedicine'
 import AdmitPatientListContainer from '@/containers/PatientList/AdmitPatientList'
 import LeavePatientListContainer from '@/containers/PatientList/LeavePatientList'
-import { connect } from 'dva';
 
 
-function Index(props) {
+export default function() {
+  
+  const [loading,setloading] = useState(false)
+  // const [isClickDepRecMedicine,setisClickDepRecMedicine] = useState(false)
+  // const [isClickAdmitPatientList,setisClickAdmitPatientList] = useState(false)
+  // const [isClickLeavePatientList,setisClickLeavePatientList] = useState(false)
 
-  const [currentClickItemKey,setcurrentClickItemKey] = useState('')
-  const [isLoading,setisLoading] = useState(false)
+  // const onClickDepRec=async()=>{
+  //   setloading(true)
+  //   await setisClickDepRecMedicine(true)
+  //   await setisClickAdmitPatientList(false)
+  //   await setisClickLeavePatientList(false)
+  //   setloading(false)
+  // }
 
-  const {dispatch} = props
+  // const onClickAdmitPatientList=async()=>{
+  //   setloading(true)
+  //   await setisClickAdmitPatientList(true)
+  //   await setisClickLeavePatientList(false)
+  //   await setisClickDepRecMedicine(false)
+  //   setloading(false)
+  // }
 
-  const RightContent = [
-    <DepRecMedicineContainer />,
-    <AdmitPatientListContainer />,
-    <LeavePatientListContainer />
-  ]
-
-  const onClickToChangeRightContent=(key)=>{
-    setcurrentClickItemKey(key)
-    dispatch({
-      type: 'GetData/saveRightData',
-      payload: []
-    })
-  }
+  // const onClickLeavePatientList=async()=>{
+  //   setloading(true)
+  //   await setisClickLeavePatientList(true)
+  //   await setisClickDepRecMedicine(false)
+  //   await setisClickAdmitPatientList(false)
+  //   setloading(false)
+  // }
 
   return(
     <div style={{height:'100vh', overflow: 'hidden'}}>
@@ -43,16 +55,41 @@ function Index(props) {
       <Row>
           <Col span={3}>
               <SideBar 
-                onClickToChangeRightContent={onClickToChangeRightContent} 
+                // onClickDepRec={onClickDepRec} 
+                // onClickAdmitPatientList={onClickAdmitPatientList}
+                // onClickLeavePatientList={onClickLeavePatientList}
               />
           </Col>
 
-          {RightContent[currentClickItemKey]}
+          <DepRecMedicineContainer />
+
+          {/* <Spin spinning={loading}>
+            {isClickDepRecMedicine? 
+              <DepRecMedicineContainer isClickDepRecMedicine={isClickDepRecMedicine}/>
+              :
+              ''
+            }
+          </Spin>
+          
+          <Spin spinning={loading}>
+            {isClickAdmitPatientList? 
+              <AdmitPatientListContainer isClickAdmitPatientList={isClickAdmitPatientList}/>
+              :
+              ''
+            }
+          </Spin>
+          
+          <Spin spinning={loading}>
+            {isClickLeavePatientList? 
+              <LeavePatientListContainer isClickLeavePatientList={isClickLeavePatientList}/>
+              :
+              ''
+            }
+          </Spin> */}
+
           
       </Row>
 
     </div>
   )
 }
-
-export default connect(({GetData})=>({GetData}))(Index)

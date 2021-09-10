@@ -52,16 +52,17 @@ const codeMessage = {
 // });
 
 // 拦截返回并发送给外壳
-axios.interceptors.response.use(config => {
-  window.parent.postMessage({
-    responseData: config.data
-  }, '*');
-  return config.data;
-}, (error) => {
-  window.parent.postMessage({
-    responseData: error.response.data
-  }, '*');
-})
+// axios.interceptors.response.use(config => {
+//   window.parent.postMessage({
+//     responseData: config.data
+//   }, '*');
+//   return config.data;
+// }, (error) => {
+//   window.parent.postMessage({
+//     responseData: error.response.data
+//   }, '*');
+// })
+
 // axios.interceptors.response.use(config => {
 //   if (config.data && (config.data.status != 200 && config.data.code != 200)) {
 //     window.parent.postMessage({
@@ -98,7 +99,7 @@ axios.interceptors.response.use(config => {
 
 
 export default function request(options) {
-  let { data, url, method = 'get' } = options
+  let { data, url, method } = options
   const cloneData = cloneDeep(data)
 
   try {

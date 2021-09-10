@@ -3,7 +3,8 @@ import gen from './gen'
 const getRD ={
     getRightData: `GET /api/RightData`,
     getLeftData: `GET /api/LeftData`,
-    getRightDrawerData: 'GET /api/RightDrawerData'
+    getRightDrawerData: 'GET /api/RightDrawerData',
+    getUserInfo: 'POST http://localhost:9000/'
 }
 
 const APIFunction = {}

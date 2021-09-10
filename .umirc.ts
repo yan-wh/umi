@@ -5,23 +5,24 @@ const config: IConfig =  {
   treeShaking: true,
   // 以下为配置式路由，去除即可实现约定式路由
   routes: [
+    //以下component都是相对于pages这个目录的
     {
       exact: true,
       path: '/',
-      redirect: '/index',
+      component: '../pages/index.jsx'
+    },
+    {
+      exact: true,
+      path: '/login',
+      component: '../pages/LoginForm.jsx'
     },
     {
       exact: true,
       path: '/index',
-      component: './index.jsx',
+      component: '../layouts/BasicLayout.jsx',
       
     },
 
-    {
-      exact: true,
-      path: '/test',
-      component: './test.jsx',
-    }
 
   ],
   disableCSSModules: true,

@@ -54,7 +54,7 @@ const mock = {
     res.send({ message: 'Ok' });
   },
   'GET /api/RightData': mockjs.mock({
-    'list|100': [{
+    'list|50': [{
       id: '@range(100)',
       reportDept: '@city',
       'number|+1': 0,
@@ -70,6 +70,7 @@ const mock = {
       diseaseName: '@ctitle',
     }],
   }),
+  //右边抽屉数据
   'GET /api/RightDrawerData': mockjs.mock({
     'list|10': [{
       id: '@range(101,110)',
@@ -91,7 +92,7 @@ const mock = {
   'GET /api/LeftData':mockjs.mock({
     'code': '200',
     'list|26': [{
-      'key|+1':0,
+      'key|+1': 0,
       'drname|3-7': '@string(true)',
       'drserch|2-3': '@string(true)',
       'pack_spec|0-300': 1,

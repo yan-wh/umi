@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useMemo, useState} from 'react'
 import { Table, Popconfirm, Button, Row, Col, Select, Icon } from 'antd';
 import './index.less'
 
@@ -14,6 +14,7 @@ export default function LeftTableComponent(props){
     //注意： useState([])里面的[]表示空数组，为 '' , useState()括号里面什么都没有，未定义，为undefined
     const [mockdata, setmockdata] = useState([])  
     const data_1 = [{
+        key: Math.random().toString().slice(-3),
         drname: '',
         drtype_nm: ''
     }]
@@ -36,7 +37,11 @@ export default function LeftTableComponent(props){
     }
 
     const randomNumber = Math.random().toString().slice(-8)
-    // console.log("随机数",Math.random().toString().slice(-5)+Date.now())
+
+    useMemo(()=>{
+        console.log("随机数",Math.random().toString().slice(-5)+Date.now())
+    },[])
+    
 
     const columns=[
         {
