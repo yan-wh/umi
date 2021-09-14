@@ -28,6 +28,7 @@ class Login extends React.Component{
         const {dispatch} = this.props
         this.props.form.validateFields((err, values) => {
           if (!err) {
+            console.log("我是表单values",values)
             // console.log('Received values of form: ', values);
             dispatch({
                 type: 'login/getUserInfo',
@@ -50,12 +51,12 @@ class Login extends React.Component{
                     layout='vertical'
                 >
                     <Form.Item>
-                        {getFieldDecorator('username', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
+                        {getFieldDecorator('phone', {
+                            rules: [{ required: true, message: 'Please input your phone!' }],
                         })(
                             <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Username"
+                            prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Phone"
                             />,
                         )}
                     </Form.Item>

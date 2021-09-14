@@ -1,6 +1,10 @@
 import { message } from "antd";
 
+import request from '@/utils/axios_request'
+
 import APIFunction from '../services/getRD'
+
+
 const {
     getUserInfo,
 } = APIFunction
@@ -13,28 +17,33 @@ export default {
 
     effects: {
 
-      //获取右边表格数据
+      //获取用户信息
       *getUserInfo({payload},{call,put}){
-        // console.log("我是models的getRightTableData")
-        let formdata = new FormData()
-        formdata.append('nickname',payload.username)
-        formdata.append('password',payload.password)
+        console.log("payload类型",Object.prototype.toString.call(payload))
+        // console.log("我是payload",payload)
+        // let formdata = new FormData()
+        // formdata.append('phone',payload.phone)
+        // formdata.append('password',payload.password)
+        // console.log("我是formdata",formdata.getAll('phone'))
+
+        // 当接口请求成功，不会出现问题。但当接口出现报错，yield就不会往下执行了。并且再次dispatch也无效。所以我们需要用try catch包裹 yield语句
         try{
-          const response = yield call(getUserInfo,formdata)  //单独写成axios请求，进行接口测试
-          // console.log('我是response',response)
-          // console.log('我是response的list',response.list)
-          if(response){
+          const response = yield call(request,payload)  //单独写成axios请求，进行接口测试，call返回return的值
+          // const response = request(payload)
+          console.log('我是response',response)
+          console.log("我是response的数据类型",Object.prototype.toString.call(response))
+          
+          if(response.status == 200){
             yield put({
-              type: 'saveData',
+              type: 'reducers',
               payload: response.data
             })
+            window.location.href='/'
           }else{
-            message.error('数据库中不存在此人，请注册!')
+            message.error(`请求服务器失败`)
           }
-
-          return response
         }catch(error){
-          return false
+          console.log(error)
         }
 
       },
