@@ -14,7 +14,8 @@ export default {
         LeftData: [],
         RightDrawerData: [],
         RightDrawerSearchData: [],
-        isLoading: false
+        isLoading: false,
+        token: []
     },
 
     effects: {
@@ -84,6 +85,12 @@ export default {
     },
 
     reducers: {
+      saveData(state,{payload}){
+        return{
+          ...state,
+          ...payload
+        }
+      },
       saveIsLoading(state,{payload}){
         // console.log("我是payload",payload)
         return{

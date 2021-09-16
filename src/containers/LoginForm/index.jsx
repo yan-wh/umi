@@ -1,9 +1,12 @@
 import React from "react";
 import { connect } from "dva";
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { withRouter } from 'umi';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 
 import './index.less'
 import harry from '@/static/harry.png'
+
+@connect(({login})=>({login}))
 
 class Login extends React.Component{
 
@@ -26,20 +29,35 @@ class Login extends React.Component{
     handleSubmit = e => {
         e.preventDefault();
         const {dispatch} = this.props
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields( async (err, values) => {
           if (!err) {
-            console.log("我是表单values",values)
+            console.log("我是表单values的类型",Object.prototype.toString.call(values))
             // console.log('Received values of form: ', values);
-            dispatch({
+            await dispatch({
                 type: 'login/getUserInfo',
-                payload: values
+                payload: values,
+                callback: (isAuth)=>{
+                    // console.log("isAuth",isAuth)
+                    if(isAuth == true){
+                        this.props.history.push('/')
+                        message.success("登录成功",3)
+                    }else if(isAuth == false){
+                        message.error("登录失败")
+                    }
+                }
             })
+            
           }
         });
     };
 
     render() {
         const { getFieldDecorator } = this.props.form;
+        // const { isAuth } = this.props.login
+        // const { userInfo } = this.props.login
+        // console.log("我是userInfo",userInfo)
+        // console.log("我是isAuth",isAuth)
+            
         return (
             // <>
             //     <div dangerouslySetInnerHTML={{__html: this.state.apiResponse}} />
@@ -93,4 +111,4 @@ class Login extends React.Component{
 
 }
 const LoginForm = Form.create({ name: 'normal_login' })(Login);
-export default connect(({login})=>({login}))(LoginForm)
+export default withRouter(LoginForm)

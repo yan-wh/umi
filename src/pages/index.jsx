@@ -1,6 +1,7 @@
 // 这是入口界面
 
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
+import { withRouter } from 'umi';
 import { Row, Col, Spin, } from 'antd'
 import {NavLink} from 'umi'
 // import { Route, Switch } from 'umi/router';
@@ -11,9 +12,9 @@ import SideBar from '@/containers/SideBar'
 import DepRecMedicineContainer from '@/containers/DepRecMedicine'
 import AdmitPatientListContainer from '@/containers/PatientList/AdmitPatientList'
 import LeavePatientListContainer from '@/containers/PatientList/LeavePatientList'
+import { connect } from 'dva';
 
-
-export default function() {
+function Index(props) {
   
   const [loading,setloading] = useState(false)
   // const [isClickDepRecMedicine,setisClickDepRecMedicine] = useState(false)
@@ -44,52 +45,55 @@ export default function() {
   //   setloading(false)
   // }
 
-  return(
-    <div style={{height:'100vh', overflow: 'hidden'}}>
-      {/* header */}
-      <Row>
-        <Header />
-      </Row>
-      {/* body */}
+  const tk = localStorage.getItem('@#@TOKEN')
+  const {dispatch} = props
+  if(tk){
+    try{
+      dispatch({
+        type: 'GetData/saveData',
+        payload: {token: tk}
+      })
+    }catch{  // 报错
+      localStorage.removeItem("@#@TOKEN")
+      window.location.href = '/login'
+    }
+  }
 
-      <Row>
-          <Col span={3}>
-              <SideBar 
-                // onClickDepRec={onClickDepRec} 
-                // onClickAdmitPatientList={onClickAdmitPatientList}
-                // onClickLeavePatientList={onClickLeavePatientList}
-              />
-          </Col>
-
-          <DepRecMedicineContainer />
-
-          {/* <Spin spinning={loading}>
-            {isClickDepRecMedicine? 
-              <DepRecMedicineContainer isClickDepRecMedicine={isClickDepRecMedicine}/>
-              :
-              ''
-            }
-          </Spin>
-          
-          <Spin spinning={loading}>
-            {isClickAdmitPatientList? 
-              <AdmitPatientListContainer isClickAdmitPatientList={isClickAdmitPatientList}/>
-              :
-              ''
-            }
-          </Spin>
-          
-          <Spin spinning={loading}>
-            {isClickLeavePatientList? 
-              <LeavePatientListContainer isClickLeavePatientList={isClickLeavePatientList}/>
-              :
-              ''
-            }
-          </Spin> */}
-
-          
-      </Row>
-
-    </div>
-  )
+  const {location} = props
+  if(location.pathname === '/'){
+    return(
+      <div style={{height:'100vh', overflow: 'hidden'}}>
+        {/* header */}
+        <Row>
+          <Header />
+        </Row>
+        {/* body */}
+  
+        <Row>
+            <Col span={3}>
+                <SideBar 
+                  // onClickDepRec={onClickDepRec} 
+                  // onClickAdmitPatientList={onClickAdmitPatientList}
+                  // onClickLeavePatientList={onClickLeavePatientList}
+                />
+            </Col>
+  
+            <DepRecMedicineContainer />
+  
+  
+            
+        </Row>
+  
+      </div>
+    )
+  }else{
+    return(
+      <>
+        {props.children}
+      </>
+    )
+  }
+  
+ 
 }
+export default connect(({GetData})=>({GetData}))(withRouter(Index))

@@ -17,7 +17,8 @@ const request = (formdata)=>{
 
     return axios({  //axios返回的是Promise对象
       method: 'post',
-      url: 'http://localhost:7000/login',
+      url: 'http://localhost:7000/toLogin/',
+      withCredentials: true,
       data: formdata,
     }).then(res=>{
       console.log("我是从服务器返回的数据",res)
