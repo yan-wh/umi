@@ -19,7 +19,7 @@ axios.interceptors.request.use(config => {
 
 const request = (formdata)=>{
     return axios({  //axios返回的是Promise对象
-      method: 'post',
+      method: 'POST',
       url: 'http://localhost:7000/toLogin/',
       // withCredentials: true,
       data: formdata,

@@ -37,7 +37,6 @@ export default {
           console.log("请求结束")
 
           const tk = decode(response.data.token)
-          localStorage.setItem("@#@TOKEN", tk)
           localStorage.setItem("@#@TOKEN",response.data.token)
           console.log('我是解密过后的token',tk)
           // console.log("我是解析token后的值",data)
