@@ -61,7 +61,7 @@ function Index(props) {
         window.location.href = '/login'
       }
     }
-  },[props])
+  },[])
 
   const {location} = props
   if(location.pathname === '/'){
