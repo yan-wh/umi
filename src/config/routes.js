@@ -20,5 +20,11 @@ module.exports = [
       component: '../layouts/BasicLayout.jsx',
       
     },
+    {
+      exact: true,
+      path: '/test',
+      component: '../pages/test.jsx',
+      
+    },
 
 ]

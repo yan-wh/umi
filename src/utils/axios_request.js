@@ -1,24 +1,27 @@
 import axios from 'axios'
 
-const request = (formdata)=>{
-    // return new Promise((resolve,reject)=>{
-    //     axios({
-    //         method: 'post',
-    //         url: 'http://localhost:7000/login',
-    //         data: formdata,
-    //       }).then(res=>{
-    //         console.log("我是从服务器返回的数据",res)
-    //         resolve(res)
-    //       }).catch(error=>{
-    //         console.log("请求服务器失败",error)
-    //         reject(error)
-    //       })
-    // })
 
+axios.interceptors.request.use(config => {
+  const passURL = ['/toLogin', '/toRegister']
+  if(passURL.includes(config.url)){
+    return config
+  }
+
+  const tk = localStorage.getItem("@#@TOKEN")
+  if(tk){
+    config.headers.Authorization = 'Bearer ' + tk
+    // console.log("Bearer",config.headers.Authorization)
+  }else{ //没有token
+    delete config.headers.Authorization
+  }
+  return config
+})
+
+const request = (formdata)=>{
     return axios({  //axios返回的是Promise对象
       method: 'post',
       url: 'http://localhost:7000/toLogin/',
-      withCredentials: true,
+      // withCredentials: true,
       data: formdata,
     }).then(res=>{
       console.log("我是从服务器返回的数据",res)
@@ -28,4 +31,4 @@ const request = (formdata)=>{
     })
 
 }
-export default request
+export {request, axios}

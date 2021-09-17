@@ -1,7 +1,7 @@
 import { message, Select } from "antd";
 import isEmpty from 'lodash/isEmpty'
 import decode from 'jwt-decode'
-import request from '@/utils/axios_request'
+import {request} from '@/utils/axios_request'
 
 import APIFunction from '../services/getRD'
 
@@ -35,20 +35,22 @@ export default {
           console.log("开始请求")
           const response = yield call(request,payload)  //单独写成axios请求，进行接口测试，call返回return的值
           console.log("请求结束")
-          // console.log('我是response',response)
-          const data = decode(response.data.token)
-          localStorage.setItem("@#@TOKEN", response.data.token)
+
+          const tk = decode(response.data.token)
+          localStorage.setItem("@#@TOKEN", tk)
+          localStorage.setItem("@#@TOKEN",response.data.token)
+          console.log('我是解密过后的token',tk)
           // console.log("我是解析token后的值",data)
           // console.log("我是response的数据类型",Object.prototype.toString.call(response))
           
           if(response.status == 200){
-            // console.log("userInfo",response.data.userInfo)
+            // console.log("userInfo",response.data)
             yield put({
               type: 'saveData',
               payload: {
                 // userInfo: response.data.userInfo,
                 // isAuth: !isEmpty(response.data.userInfo)
-                isAuth: !isEmpty(data)
+                isAuth: !isEmpty(tk)
               }
             })
             // window.location.href='/'  //登录成功跳转到首页
@@ -70,7 +72,7 @@ export default {
 
     reducers: {
       saveData(state,{payload}){
-        console.log("我是payload",payload.isAuth)
+        // console.log("我是payload",payload.isAuth)
         return{
           ...state,
           ...payload

@@ -2,6 +2,7 @@
 
 import React, { useState , useEffect} from 'react';
 import { withRouter } from 'umi';
+import decode from 'jwt-decode';
 import { Row, Col, Spin, } from 'antd'
 import {NavLink} from 'umi'
 // import { Route, Switch } from 'umi/router';
@@ -45,19 +46,22 @@ function Index(props) {
   //   setloading(false)
   // }
 
-  const tk = localStorage.getItem('@#@TOKEN')
-  const {dispatch} = props
-  if(tk){
-    try{
-      dispatch({
-        type: 'GetData/saveData',
-        payload: {token: tk}
-      })
-    }catch{  // 报错
-      localStorage.removeItem("@#@TOKEN")
-      window.location.href = '/login'
+  useEffect(()=>{
+    const token = localStorage.getItem('@#@TOKEN')
+    const tk = decode(token)
+    const {dispatch} = props
+    if(token){
+      try{
+        dispatch({
+          type: 'GetData/saveData',
+          payload: {token: tk}
+        })
+      }catch{  // 报错
+        localStorage.removeItem("@#@TOKEN")
+        window.location.href = '/login'
+      }
     }
-  }
+  },[props])
 
   const {location} = props
   if(location.pathname === '/'){
