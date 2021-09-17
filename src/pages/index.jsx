@@ -46,7 +46,6 @@ function Index(props) {
   //   setloading(false)
   // }
 
-  const empty = []
   useEffect(()=>{
     const token = localStorage.getItem('@#@TOKEN')
     const tk = decode(token)
