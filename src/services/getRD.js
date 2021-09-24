@@ -4,7 +4,8 @@ const getRD ={
     getRightData: `GET /api/RightData`,
     getLeftData: `GET /api/LeftData`,
     getRightDrawerData: 'GET /api/RightDrawerData',
-    getUserInfo: 'POST http://localhost:9000/'
+    getUserInfo: 'POST http://localhost:9000/',
+    getToken: 'POST http://localhost:7000/index/'
 }
 
 const APIFunction = {}

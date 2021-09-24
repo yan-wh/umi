@@ -46,22 +46,35 @@ function Index(props) {
   //   setloading(false)
   // }
 
+  const verify = async ()=>{
+    const { dispatch } = props
+    await dispatch({
+      type: 'GetData/getToken',
+      payload: ''
+    })
+  }
+
   useEffect(()=>{
-    const token = localStorage.getItem('@#@TOKEN')
-    const tk = decode(token)
-    const {dispatch} = props
-    if(token){
-      try{
-        dispatch({
-          type: 'GetData/saveData',
-          payload: {token: tk}
-        })
-      }catch{  // 报错
-        localStorage.removeItem("@#@TOKEN")
-        window.location.href = '/login'
+    const { dispatch } = props
+    const { tokenUserInfo } = props.GetData
+    verify()
+    if(tokenUserInfo.status === '1'){
+      const token = localStorage.getItem('@#@TOKEN')
+      const tk = decode(token)
+      if(token){
+        try{
+          dispatch({
+            type: 'GetData/saveData',
+            payload: {token: tk}
+          })
+        }catch{  // 报错
+          localStorage.removeItem("@#@TOKEN")
+          window.location.href = '/login'
+        }
       }
     }
-  },[props])
+    
+  },[props, verify])
 
   const {location} = props
   if(location.pathname === '/'){

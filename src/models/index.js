@@ -4,7 +4,8 @@ import APIFunction from '../services/getRD'
 const {
   getRightData,
   getLeftData,
-  getRightDrawerData
+  getRightDrawerData,
+  getToken
 } = APIFunction
 
 export default {
@@ -15,7 +16,8 @@ export default {
         RightDrawerData: [],
         RightDrawerSearchData: [],
         isLoading: false,
-        token: []
+        token: [],
+        tokenUserInfo: []
     },
 
     effects: {
@@ -27,10 +29,10 @@ export default {
           const response = yield call(getRightData,payload)
           // console.log('我是response',response)
           // console.log('我是response的list',response.list)
-          if(response){
+          if(response.status == 200){
             yield put({
               type: 'saveRightData',
-              payload: response.list
+              payload: response.data.list
             })
           }else{
             message.error('未请求到RightTableData数据')
@@ -50,7 +52,7 @@ export default {
           if(response){
             yield put({
               type: 'saveRightDrawerData',
-              payload: response.list
+              payload: response.data.list
             })
           }else{
             message.error('未请求到RightDrawer数据')
@@ -79,6 +81,21 @@ export default {
           return false
         }
 
+      },
+
+      *getToken({payload},{call,put}){
+        const response = yield call(getToken)
+        // console.log("返回的token用户信息",response)
+        if(response.status == 200){
+          yield put({
+            type: 'saveData',
+            payload: {
+              tokenUserInfo: response.data
+            }
+          })
+        }else{
+          message.error('未验证成功')
+        }
       }
 
 

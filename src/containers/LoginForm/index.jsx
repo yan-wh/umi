@@ -40,6 +40,7 @@ class Login extends React.Component{
                     // console.log("isAuth",isAuth)
                     if(isAuth == true){
                         this.props.history.push('/')
+                        message.destroy()
                         message.success("登录成功",3)
                     }else if(isAuth == false){
                         message.error("登录失败")

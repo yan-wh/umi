@@ -38,9 +38,9 @@ export default function LeftTableComponent(props){
 
     const randomNumber = Math.random().toString().slice(-8)
 
-    useMemo(()=>{
-        console.log("随机数",Math.random().toString().slice(-5)+Date.now())
-    },[])
+    // useMemo(()=>{
+    //     console.log("随机数",Math.random().toString().slice(-5)+Date.now())
+    // },[])
     
 
     const columns=[
