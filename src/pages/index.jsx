@@ -73,7 +73,6 @@ function Index(props) {
         }
       }
     }
-    
   },[props, verify])
 
   const {location} = props
