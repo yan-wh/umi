@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 // import { connect } from 'dva';
 import SideBarComponent from '../../components/SideBar'
 
 function SideBarContainer(props){
 
-    const [ isLoading, setisLoading ]=useState(false)
-    const {onClickToChangeRightContent} = props
+    // const [ isLoading, setisLoading ]=useState(false)
+    // const {onClickToChangeRightContent} = props
     
     // const { dispatch } = props
     
@@ -19,7 +19,7 @@ function SideBarContainer(props){
 
     return(
       <SideBarComponent 
-        onClickToChangeRightContent={onClickToChangeRightContent}
+        // onClickToChangeRightContent={onClickToChangeRightContent}
       />
     )
 }

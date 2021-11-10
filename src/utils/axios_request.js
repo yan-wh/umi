@@ -18,17 +18,32 @@ axios.interceptors.request.use(config => {
 })
 
 const request = (formdata)=>{
-    return axios({  //axios返回的是Promise对象
+  // return axios({  //axios返回的是Promise对象
+  //   method: 'POST',
+  //   url: 'http://localhost:7000/toLogin/',
+  //   // withCredentials: true,
+  //   data: formdata,
+  // }).then(res=>{
+  //   console.log("我是从服务器返回的数据",res)
+  //   return res
+  // }).catch(error=>{
+  //   console.log("请求服务器失败",error)
+  // })
+
+  return new Promise((resolve,reject) => {
+    axios({  //axios返回的是Promise对象
       method: 'POST',
       url: 'http://localhost:7000/toLogin/',
       // withCredentials: true,
       data: formdata,
     }).then(res=>{
       console.log("我是从服务器返回的数据",res)
-      return res
+      resolve(res)
     }).catch(error=>{
       console.log("请求服务器失败",error)
+      reject(error)
     })
+  })
 
 }
 export {request, axios}

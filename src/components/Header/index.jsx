@@ -1,10 +1,11 @@
+import React from 'react'
 import { Avatar, Row, Col, Icon } from 'antd'
 import './index.less'
 
 import header from '@/static/header_2.ico'
 
-export default function HeaderComponent(){
-
+export default function HeaderComponent(props){
+    // console.log(props)
     return(
         <Row className="header-container">
             <Col span={3} className="col-avatar">

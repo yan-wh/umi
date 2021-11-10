@@ -83,19 +83,26 @@ export default {
 
       },
 
-      *getToken({payload},{call,put}){
-        const response = yield call(getToken)
-        // console.log("返回的token用户信息",response)
-        if(response.status == 200){
-          yield put({
-            type: 'saveData',
-            payload: {
-              tokenUserInfo: response.data
-            }
-          })
-        }else{
-          message.error('未验证成功')
+      *getToken({payload,callback},{call,put,select}){
+        try{
+          const response = yield call(getToken,payload)
+          // console.log("返回的token用户信息",response)
+          if(response.data.status == '1'){
+            yield put({
+              type: 'saveData',
+              payload: {
+                tokenUserInfo: response.data
+              }
+            })
+          }else{
+            message.error('未登录成功！')
+          }
+        }catch(error){
+          console.log(error)
         }
+        const tokenUserInfo = yield select(state => state.GetData.tokenUserInfo)
+        callback(tokenUserInfo)
+        // console.log('tokenUserInfo',tokenUserInfo)
       }
 
 
@@ -140,7 +147,7 @@ export default {
           RightDrawerData: payload
         }
       },
-      searchRightDrawerPatient(state,{payload}){
+      searchRightDrawerPatient(state,{payload}){  // 搜索病患
         const targetPatient = state.RightDrawerData.filter((item,index)=>
           item.name==payload.name
         )

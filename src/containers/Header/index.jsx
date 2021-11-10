@@ -1,8 +1,12 @@
+import React from 'react'
 import HeaderComponent from '@/components/Header'
+import { connect } from 'dva'
 
-export default function HeaderContainer(){
+function HeaderContainer(props){
 
     return(
-        <HeaderComponent />
+        <HeaderComponent {...props}/>
     )
 }
+
+export default connect(({GetData})=>({GetData}))(HeaderContainer)

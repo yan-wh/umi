@@ -10,6 +10,7 @@ export default function LeftTableComponent(props){
     const { isLoading } = props.GetData
 
     const [DepartmentValue, setDepartmentValue] = useState('')
+    const [disabled, setDisabled] = useState(false)
 
     //注意： useState([])里面的[]表示空数组，为 '' , useState()括号里面什么都没有，未定义，为undefined
     const [mockdata, setmockdata] = useState([])  
@@ -56,7 +57,7 @@ export default function LeftTableComponent(props){
                     // defaultValue={record.drname}
                     onChange={selectDepartmentValue}
                 >
-                    <Option value="Surgery">外科</Option>
+                    <Option value="Surgery" disabled={disabled}>外科</Option>
                     <Option value="internal-medicine">内科</Option>
                 </Select>
             }

@@ -35,6 +35,7 @@ export default {
           console.log("开始请求")
           const response = yield call(request,payload)  //单独写成axios请求，进行接口测试，call返回return的值
           console.log("请求结束")
+          console.log('response',response)
 
           const tk = decode(response.data.token)
           localStorage.setItem("@#@TOKEN",response.data.token)
@@ -42,7 +43,7 @@ export default {
           // console.log("我是解析token后的值",data)
           // console.log("我是response的数据类型",Object.prototype.toString.call(response))
           
-          if(response.status == 200){
+          if(response.data.status == 200){
             // console.log("userInfo",response.data)
             yield put({
               type: 'saveData',

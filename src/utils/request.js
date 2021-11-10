@@ -97,6 +97,22 @@ const codeMessage = {
 //   }
 // });
 
+axios.interceptors.request.use(config => {
+  const passURL = ['/toLogin', '/toRegister']
+  if(passURL.includes(config.url)){
+    return config
+  }
+
+  const tk = localStorage.getItem("@#@TOKEN")
+  if(tk){
+    config.headers.Authorization = 'Bearer ' + tk
+    // console.log("Bearer",config.headers.Authorization)
+  }else{ //没有token
+    delete config.headers.Authorization
+  }
+  return config
+})
+
 
 export default function request(options) {
   let { data, url, method } = options
@@ -104,7 +120,7 @@ export default function request(options) {
 
   try {
     let domain = ''
-    const urlMatch = url.match(/[a-zA-z]+:\/\/[^/]*/)
+    const urlMatch = url.match(/[a-zA-Z]+:\/\/[^/]*/)
     if (urlMatch) {
       ;[domain] = urlMatch
       url = url.slice(domain.length)

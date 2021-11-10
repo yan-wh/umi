@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Menu, Icon, Avatar } from 'antd';
+import React from 'react'
+import { Link } from 'umi';
+import { Menu, Icon } from 'antd';
 
 
 import './index.less'
@@ -29,7 +30,8 @@ export default class SideBarComponent extends React.Component{
 
 
     render() {
-        const {onClickToChangeRightContent} = this.props
+        // 依照SubMenu的key显示对应组件
+        // const {onClickToChangeRightContent} = this.props
         return (
             <div className="side-bar">
                 <Menu
@@ -37,10 +39,10 @@ export default class SideBarComponent extends React.Component{
                     // openKeys={this.state.openKeys}
                     onOpenChange={this.onOpenChange}
                     style={{ width: 'auto', backgroundColor: '#2f3640', color: '#dcdde1'}}
-                    onClick={(item,key)=>{
-                        // console.log("我是你此时鼠标点击的item的key值",item.key)
-                        onClickToChangeRightContent(item.key)
-                    }}
+                    // onClick={(item,key)=>{
+                    //     // console.log("我是你此时鼠标点击的item的key值",item.key)
+                    //     onClickToChangeRightContent(item.key)
+                    // }}
                 >
                     <Menu.Item key="0">
                         <span>
@@ -57,7 +59,7 @@ export default class SideBarComponent extends React.Component{
                             </span>
                         }
                         >
-                        <Menu.Item key="1"><span>入院患者</span></Menu.Item>
+                        <Menu.Item key="1"><Link to='/test'><span>入院患者</span></Link></Menu.Item>
                         <Menu.Item key="2"><span>出院患者</span></Menu.Item>
                     </SubMenu>
                     <SubMenu
