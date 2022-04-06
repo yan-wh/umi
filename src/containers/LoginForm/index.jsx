@@ -39,7 +39,7 @@ class Login extends React.Component{
                 callback: (isAuth)=>{
                     // console.log("isAuth",isAuth)
                     if(isAuth == true){
-                        this.props.history.push('/')
+                        this.props.history.push('/Home')
                         message.destroy()
                         message.success("登录成功",3)
                     }else if(isAuth == false){

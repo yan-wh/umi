@@ -5,7 +5,7 @@ import rtconfig from './src/config/routes'
 const config: IConfig =  {
   treeShaking: true,
   // 以下为配置式路由，去除即可实现约定式路由
-  routes: rtconfig,
+  // routes: rtconfig,
   disableCSSModules: true,
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html

@@ -1,7 +1,7 @@
-import request from '../utils/request';
+import RequestServices from '@/utils/request';
 export default function gen(params) {
-  let url = params;
-  let method = 'GET';
+  let url = ''
+  let method = ''
   const paramsArray = params.split(' ')
   if (paramsArray.length === 2) {
     method = paramsArray[0];
@@ -9,7 +9,7 @@ export default function gen(params) {
   }
 
   return function (data) {
-    return request({
+    return RequestServices({
       url,
       data,
       method,

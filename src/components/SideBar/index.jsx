@@ -59,7 +59,7 @@ export default class SideBarComponent extends React.Component{
                             </span>
                         }
                         >
-                        <Menu.Item key="1"><Link to='/test'><span>入院患者</span></Link></Menu.Item>
+                        <Menu.Item key="1"><Link to='/admit'><span>入院患者</span></Link></Menu.Item>
                         <Menu.Item key="2"><span>出院患者</span></Menu.Item>
                     </SubMenu>
                     <SubMenu

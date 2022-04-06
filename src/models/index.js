@@ -5,7 +5,9 @@ const {
   getRightData,
   getLeftData,
   getRightDrawerData,
-  getToken
+  getToken,
+  getCityInfo,
+  getCityWeatherInfo,
 } = APIFunction
 
 export default {
@@ -17,11 +19,33 @@ export default {
         RightDrawerSearchData: [],
         isLoading: false,
         token: [],
-        tokenUserInfo: []
+        tokenUserInfo: [],
+        cityInfo: {},
+        cityWeatherInfo: {},
+        selectedItemKey: ['1'],//选中的menuItem
     },
 
     effects: {
 
+      //获取城市信息
+      *getCityInfo({ payload, callback}, {call, put}){
+        const response = yield call(getCityInfo,)
+        yield put({
+          type: 'reducer',
+          cityInfo: response ? response.data : ''
+        })
+        callback(response)
+      },
+      //获取城市天气信息
+      *getCityWeatherInfo({payload}, {call, put}){
+        const params = new URLSearchParams();
+        params.append('city', payload.city);
+        const response = yield call(getCityWeatherInfo, params)
+        yield put({
+          type: 'reducer',
+          cityWeatherInfo: response ? response.data : ''
+        })
+      },
       //获取右边表格数据
       *getRightTableData({payload},{call,put}){
         // console.log("我是models的getRightTableData")
@@ -109,6 +133,12 @@ export default {
     },
 
     reducers: {
+      reducer(state, {payload}){
+        return{
+          ...state,
+          ...payload
+        }
+      },
       saveData(state,{payload}){
         return{
           ...state,

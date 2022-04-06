@@ -8,7 +8,8 @@
 */
 
 // const path = require('path')
-module.exports = [
+export default function Routes(){
+  return [
     //以下component都是相对于pages这个目录的
     {
       exact: true,
@@ -26,6 +27,33 @@ module.exports = [
       component: '../pages/test.jsx',
       
     },
+    {
+      exact: true,
+      path: '/admit',
+      component: '../pages/AdmitPatients/index.jsx',
+    },
+  ]
+}
+
+
+// module.exports = [
+//     //以下component都是相对于pages这个目录的
+//     {
+//       exact: true,
+//       path: '/',
+//       component: '../pages/index.jsx',
+//     },
+//     {
+//       exact: true,
+//       path: '/login',
+//       component: '../pages/LoginForm.jsx',
+//     },
+//     {
+//       exact: true,
+//       path: '/test',
+//       component: '../pages/test.jsx',
+      
+//     },
     
 
-]
+// ]
